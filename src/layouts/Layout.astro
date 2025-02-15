@@ -1,22 +1,61 @@
-<!doctype html>
+---
+interface Props {
+  title: string;
+}
+
+import ThemeToggle from '../components/ThemeToggle.astro';
+import Footer from '../components/Footer.astro';
+const { title } = Astro.props;
+
+// Add cache control headers
+Astro.response.headers.set('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+---
+
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Power Your E-commerce Success with Helium 10 - The all-in-one suite of tools and training for Amazon and Walmart sellers">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Performance optimizations -->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="index, follow">
+    
+    <title>{title}</title>
+  </head>
+  <body class="bg-white text-gray-900 min-h-screen">
+    <ThemeToggle />
+    <main class="bg-white">
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  :root {
+    color-scheme: light;
+    --theme-transition-duration: 0.3s;
+  }
+
+  .theme-transition {
+    transition: background-color var(--theme-transition-duration) ease,
+                color var(--theme-transition-duration) ease,
+                border-color var(--theme-transition-duration) ease,
+                fill var(--theme-transition-duration) ease,
+                stroke var(--theme-transition-duration) ease;
+  }
+  
+  /* Optimize CSS performance */
+  img, svg {
+    @apply transform-gpu;
+  }
+  
+  /* Reduce layout shift */
+  main {
+    @apply overflow-x-hidden;
+  }
 </style>

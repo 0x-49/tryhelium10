@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const plans = [
+  {
+    name: 'Starter',
+    price: 29,
+    description: 'The training and tools you need to get started',
+    features: {
+      'Product Research': {
+        'Black Box': 'Limited',
+        'Xray': '✓',
+        'Xray for Walmart': 'Limited'
+      },
+      'Keyword Research': {
+        'Cerebro': 'Limited',
+        'Magnet': 'Limited',
+        'Xray Keywords': '5 uses'
+      },
+      'Analytics': {
+        'My Products': '20',
+        'Keyword Tracker': '500 keywords',
+        'Keyword Tracker for Walmart': '100 keywords',
+        'Market Tracker': 'Up to 1 Market'
+      },
+      'Operations': {
+        'Alerts': '2 products',
+        'Follow-Up': '5,000 emails',
+        'Inventory Management': 'Limited'
+      }
+    },
+    highlight: false
+  },
+  {
+    name: 'Platinum',
+    price: 79,
+    description: 'The must-have solution for your growing business',
+    features: {
+      'Product Research': {
+        'Black Box': '✓',
+        'Xray': '✓',
+        'Xray for Walmart': '✓'
+      },
+      'Keyword Research': {
+        'Cerebro': '✓',
+        'Magnet': '✓',
+        'Xray Keywords': '✓'
+      },
+      'Analytics': {
+        'My Products': '1,000',
+        'Keyword Tracker': '2,500 keywords',
+        'Keyword Tracker for Walmart': '250 keywords',
+        'Market Tracker': 'Up to 3 Markets'
+      },
+      'Operations': {
+        'Alerts': '20 products',
+        'Follow-Up': '15,000 emails',
+        'Inventory Management': 'Up to 40 SKUs'
+      }
+    },
+    highlight: true
+  },
+  {
+    name: 'Diamond',
+    price: 229,
+    description: 'Perfect for expert sellers looking to scale',
+    features: {
+      'Product Research': {
+        'Black Box': '✓',
+        'Xray': '✓',
+        'Xray for Walmart': '✓'
+      },
+      'Keyword Research': {
+        'Cerebro': '✓',
+        'Magnet': '✓',
+        'Xray Keywords': '✓'
+      },
+      'Analytics': {
+        'My Products': '1,000',
+        'Keyword Tracker': '2,500 keywords',
+        'Keyword Tracker for Walmart': '250 keywords',
+        'Market Tracker': 'Up to 5 Markets'
+      },
+      'Operations': {
+        'Alerts': '200 products',
+        'Follow-Up': '15,000 emails',
+        'Inventory Management': '✓'
+      }
+    },
+    highlight: false
+  }
+];
+---
+
+<Layout title="Pricing - Helium 10">
+  <main class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <div class="text-center">
+        <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">
+          Plans & Pricing
+        </h1>
+        <p class="mt-4 text-xl text-gray-600">
+          Powerful plans for every stage of your seller journey
+        </p>
+        <div class="mt-4 inline-flex items-center bg-blue-50 rounded-full px-4 py-2">
+          <span class="text-blue-600 font-medium">🚀 Join the other 9,824 people who signed up last week</span>
+        </div>
+      </div>
+
+      <!-- Pricing Toggle -->
+      <div class="relative mt-12 flex justify-center">
+        <div class="flex items-center space-x-3">
+          <span class="text-sm font-medium text-gray-900">Monthly</span>
+          <button type="button" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none" role="switch" aria-checked="false">
+            <span class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+          <span class="text-sm font-medium text-gray-900">Annual <span class="text-green-500">(Save 25%)</span></span>
+        </div>
+      </div>
+
+      <!-- Pricing Cards -->
+      <div class="mt-12 space-y-4 sm:mt-16 sm:grid sm:grid-cols-3 sm:gap-6 sm:space-y-0">
+        {plans.map((plan) => (
+          <div class={`rounded-lg shadow-lg divide-y divide-gray-200 ${plan.highlight ? 'ring-2 ring-blue-500' : ''}`}>
+            <div class="p-6">
+              {plan.highlight && (
+                <span class="inline-flex px-4 py-1 rounded-full text-sm font-semibold tracking-wide uppercase bg-blue-100 text-blue-600 mb-4">
+                  Most popular
+                </span>
+              )}
+              <h2 class="text-2xl font-semibold text-gray-900">{plan.name}</h2>
+              <p class="mt-4 text-sm text-gray-500">{plan.description}</p>
+              <p class="mt-8">
+                <span class="text-4xl font-extrabold text-gray-900">${plan.price}</span>
+                <span class="text-base font-medium text-gray-500">/mo</span>
+              </p>
+              <a href="#" class={`mt-8 block w-full bg-${plan.highlight ? 'blue' : 'gray'}-600 hover:bg-${plan.highlight ? 'blue' : 'gray'}-700 border border-transparent rounded-md py-3 px-6 text-center font-medium text-white`}>
+                Buy Now
+              </a>
+            </div>
+            <div class="px-6 pt-6 pb-8">
+              <h3 class="text-xs font-semibold text-gray-900 tracking-wide uppercase">What's included</h3>
+              <ul role="list" class="mt-6 space-y-4">
+                {Object.entries(plan.features).map(([category, features]) => (
+                  <li>
+                    <div class="font-medium text-gray-900 mb-2">{category}</div>
+                    {Object.entries(features).map(([feature, value]) => (
+                      <div class="flex items-center text-sm text-gray-500 mb-1">
+                        <span class="flex-grow">{feature}</span>
+                        <span class={`ml-2 ${value === '✓' ? 'text-green-500' : value === 'Limited' ? 'text-orange-500' : ''}`}>
+                          {value}
+                        </span>
+                      </div>
+                    ))}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Add-ons Section -->
+      <div class="mt-16">
+        <h2 class="text-3xl font-bold text-center text-gray-900">Powerful Add-ons</h2>
+        <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-900">Exclusive Training</h3>
+            <p class="mt-4 text-gray-600">Networking and training reserved exclusively for top-tier sellers looking to scale faster</p>
+            <p class="mt-4">
+              <span class="text-2xl font-bold text-gray-900">$99</span>
+              <span class="text-gray-500">/mo</span>
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-900">Market Intelligence</h3>
+            <p class="mt-4 text-gray-600">Access the most accurate insights to grow your business and outperform your competitors</p>
+            <p class="mt-4">
+              <span class="text-2xl font-bold text-gray-900">$500</span>
+              <span class="text-gray-500">/mo</span>
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-900">Elite Package</h3>
+            <p class="mt-4 text-gray-600">Advanced features and priority support for power users</p>
+            <p class="mt-4">
+              <span class="text-2xl font-bold text-gray-900">$99</span>
+              <span class="text-gray-500">/mo</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="mt-16">
+        <h2 class="text-3xl font-bold text-center text-gray-900">Frequently Asked Questions</h2>
+        <dl class="mt-8 space-y-6 divide-y divide-gray-200">
+          <div class="pt-6">
+            <dt class="text-lg">
+              <button class="text-left w-full flex justify-between items-start text-gray-400">
+                <span class="font-medium text-gray-900">What's included in each plan?</span>
+                <span class="ml-6 h-7 flex items-center">
+                  <svg class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+            </dt>
+            <dd class="mt-2 pr-12">
+              <p class="text-base text-gray-500">Each plan includes a different set of features optimized for different stages of your seller journey. The Starter plan is perfect for beginners, Platinum for growing businesses, and Diamond for expert sellers looking to scale.</p>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Custom styles can be added here */
+  .feature-progress {
+    @apply h-2 bg-gray-200 rounded-full overflow-hidden;
+  }
+  
+  .feature-progress-bar {
+    @apply h-full bg-blue-500 transition-all duration-300;
+  }
+</style>

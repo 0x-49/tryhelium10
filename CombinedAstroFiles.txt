@@ -1,0 +1,1983 @@
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\Footer.astro
+================================================================================
+
+---
+import { Facebook, Linkedin, Twitter, Instagram, Youtube, Phone, Mail, MapPin } from 'lucide-astro';
+import { SOCIAL_LINKS, CONTACT_INFO } from '../config/constants';
+
+const socialIcons = {
+  facebook: Facebook,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  instagram: Instagram,
+  youtube: Youtube
+};
+---
+
+<footer class="bg-gray-50 dark:bg-gray-800 py-12">
+  <div class="responsive-container">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Contact Info -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Contact Us</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href={`tel:${CONTACT_INFO.phone}`} class="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+              <Phone class="w-5 h-5 mr-2" />
+              {CONTACT_INFO.phone}
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${CONTACT_INFO.email}`} class="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+              <Mail class="w-5 h-5 mr-2" />
+              {CONTACT_INFO.email}
+            </a>
+          </li>
+          <li>
+            <div class="flex items-start text-gray-600 dark:text-gray-300">
+              <MapPin class="w-5 h-5 mr-2 mt-1 flex-shrink-0" />
+              <span>{CONTACT_INFO.address}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Links -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Connect With Us</h3>
+        <div class="grid grid-cols-3 gap-4">
+          {Object.entries(SOCIAL_LINKS).map(([platform, url]) => {
+            const Icon = socialIcons[platform as keyof typeof socialIcons];
+            return (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-center w-12 h-12 rounded-lg bg-white dark:bg-gray-700 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              >
+                <Icon class="w-6 h-6" />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Quick Links</h3>
+        <ul class="space-y-2">
+          <li>
+            <a href="#features" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Features</a>
+          </li>
+          <li>
+            <a href="#success-stories" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Success Stories</a>
+          </li>
+          <li>
+            <a href="#pricing" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Pricing</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Stay Updated</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Get the latest updates and tips for Amazon selling.</p>
+      
+      </div>
+    </div>
+
+    <!-- Affiliate Disclaimer -->
+    <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+      <div class="text-sm text-gray-500 dark:text-gray-400 space-y-4">
+        <p class="max-w-4xl mx-auto text-center">
+          <strong>Affiliate Disclaimer:</strong> As an affiliate partner of Helium 10, we may earn a commission from qualifying purchases. 
+          This does not affect your pricing or user experience. We are committed to providing honest, unbiased information about Helium 10's tools and services.
+        </p>
+        <p class="text-center">&copy; {new Date().getFullYear()} Helium 10. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\Header.astro
+================================================================================
+
+---
+import { BarChart3 } from 'lucide-astro';
+import { AFFILIATE_URL } from '../config/constants.js';
+import ShinyButton from './ui/ShinyButton.astro';
+---
+
+<header class="bg-gradient-to-r from-blue-900 to-blue-800 text-white sticky top-0 z-50">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center space-x-2">
+        <BarChart3 class="w-8 h-8" />
+        <span class="font-bold text-xl tracking-tight">Helium 10</span>
+      </div>
+      
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#features" class="hover:text-blue-200 transition-colors">Features</a>
+        <a href="#pricing" class="hover:text-blue-200 transition-colors">Pricing</a>
+        <a href="#resources" class="hover:text-blue-200 transition-colors">Resources</a>
+        <a href="#about" class="hover:text-blue-200 transition-colors">About</a>
+      </div>
+      
+      <!-- CTA Buttons -->
+      <div class="flex items-center space-x-4">
+        <a href={AFFILIATE_URL} class="hover:text-blue-200 transition-colors hidden md:inline-block">Login</a>
+        <ShinyButton
+          text="Get Started"
+          className="hidden md:inline-flex"
+        />
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button type="button" class="text-white hover:text-blue-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="hidden md:hidden">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="#features" class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">Features</a>
+        <a href="#pricing" class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">Pricing</a>
+        <a href="#resources" class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">Resources</a>
+        <a href="#about" class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">About</a>
+        <a href={AFFILIATE_URL} class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">Login</a>
+        <a href={AFFILIATE_URL} class="block px-3 py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition-colors text-center font-semibold">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const menuButton = document.querySelector('button[type="button"]');
+  const mobileMenu = document.querySelector('.hidden.md\\:hidden');
+  
+  menuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    if (!target.closest('header')) {
+      mobileMenu?.classList.add('hidden');
+    }
+  });
+  
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      if (href) {
+        document.querySelector(href)?.scrollIntoView({
+          behavior: 'smooth'
+        });
+        // Close mobile menu after clicking a link
+        mobileMenu?.classList.add('hidden');
+      }
+    });
+  });
+</script>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ThemeToggle.astro
+================================================================================
+
+---
+import { Sun, Moon } from 'lucide-astro';
+---
+
+<button
+  id="theme-toggle"
+  class="fixed top-4 right-4 z-50 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 group"
+  aria-label="Toggle Dark Mode"
+>
+  <Sun class="w-6 h-6 text-amber-500 dark:hidden transition-transform group-hover:rotate-12" />
+  <Moon class="w-6 h-6 text-blue-400 hidden dark:block transition-transform group-hover:rotate-12" />
+</button>
+
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+  
+  function setTheme(theme: string) {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }
+
+  // Initialize theme (default to light)
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  setTheme(savedTheme);
+
+  themeToggle?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(isDark ? 'light' : 'dark');
+  });
+</script>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\Welcome.astro
+================================================================================
+
+---
+import astroLogo from '../assets/astro.svg';
+import background from '../assets/background.svg';
+---
+
+<div id="container">
+	<img id="background" src={background.src} alt="" fetchpriority="high" />
+	<main>
+		<section id="hero">
+			<a href="https://astro.build"
+				><img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" /></a
+			>
+			<h1>
+				To get started, open the <code><pre>src/pages</pre></code> directory in your project.
+			</h1>
+			<section id="links">
+				<a class="button" href="https://docs.astro.build">Read our docs</a>
+				<a href="https://astro.build/chat"
+					>Join our Discord <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36"
+						><path
+							fill="currentColor"
+							d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"
+						></path></svg
+					>
+				</a>
+			</section>
+		</section>
+	</main>
+
+	<a href="https://astro.build/blog/astro-5/" id="news" class="box">
+		<svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"
+			><path
+				d="M24.667 12c1.333 1.414 2 3.192 2 5.334 0 4.62-4.934 5.7-7.334 12C18.444 28.567 18 27.456 18 26c0-4.642 6.667-7.053 6.667-14Zm-5.334-5.333c1.6 1.65 2.4 3.43 2.4 5.333 0 6.602-8.06 7.59-6.4 17.334C13.111 27.787 12 25.564 12 22.666c0-4.434 7.333-8 7.333-16Zm-6-5.333C15.111 3.555 16 5.556 16 7.333c0 8.333-11.333 10.962-5.333 22-3.488-.774-6-4-6-8 0-8.667 8.666-10 8.666-20Z"
+				fill="#111827"></path></svg
+		>
+		<h2>What's New in Astro 5.0?</h2>
+		<p>
+			From content layers to server islands, click to learn more about the new features and
+			improvements in Astro 5.0
+		</p>
+	</a>
+</div>
+
+<style>
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
+	#container {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		height: 100%;
+	}
+
+	main {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+	#hero {
+		display: flex;
+		align-items: start;
+		flex-direction: column;
+		justify-content: center;
+		padding: 16px;
+	}
+
+	h1 {
+		font-size: 22px;
+		margin-top: 0.25em;
+	}
+
+	#links {
+		display: flex;
+		gap: 16px;
+	}
+
+	#links a {
+		display: flex;
+		align-items: center;
+		padding: 10px 12px;
+		color: #111827;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	#links a:hover {
+		color: rgb(78, 80, 86);
+	}
+
+	#links a svg {
+		height: 1em;
+		margin-left: 8px;
+	}
+
+	#links a.button {
+		color: white;
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		box-shadow:
+			inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+			inset 0 -2px 0 rgba(0, 0, 0, 0.24);
+		border-radius: 10px;
+	}
+
+	#links a.button:hover {
+		color: rgb(230, 230, 230);
+		box-shadow: none;
+	}
+
+	pre {
+		font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+			'DejaVu Sans Mono', monospace;
+		font-weight: normal;
+		background: linear-gradient(14deg, #d83333 0%, #f041ff 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		margin: 0;
+	}
+
+	h2 {
+		margin: 0 0 1em;
+		font-weight: normal;
+		color: #111827;
+		font-size: 20px;
+	}
+
+	p {
+		color: #4b5563;
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: -0.006em;
+		margin: 0;
+	}
+
+	code {
+		display: inline-block;
+		background:
+			linear-gradient(66.77deg, #f3cddd 0%, #f5cee7 100%) padding-box,
+			linear-gradient(155deg, #d83333 0%, #f041ff 18%, #f5cee7 45%) border-box;
+		border-radius: 8px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+	}
+
+	.box {
+		padding: 16px;
+		background: rgba(255, 255, 255, 1);
+		border-radius: 16px;
+		border: 1px solid white;
+	}
+
+	#news {
+		position: absolute;
+		bottom: 16px;
+		right: 16px;
+		max-width: 300px;
+		text-decoration: none;
+		transition: background 0.2s;
+		backdrop-filter: blur(50px);
+	}
+
+	#news:hover {
+		background: rgba(255, 255, 255, 0.55);
+	}
+
+	@media screen and (max-height: 368px) {
+		#news {
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		#container {
+			display: flex;
+			flex-direction: column;
+		}
+
+		#hero {
+			display: block;
+			padding-top: 10%;
+		}
+
+		#links {
+			flex-wrap: wrap;
+		}
+
+		#links a.button {
+			padding: 14px 18px;
+		}
+
+		#news {
+			right: 16px;
+			left: 16px;
+			bottom: 2.5rem;
+			max-width: 100%;
+		}
+
+		h1 {
+			line-height: 1.5;
+		}
+	}
+</style>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ui\AnimatedBackground.astro
+================================================================================
+
+---
+const { className } = Astro.props;
+---
+
+<div class:list={["relative overflow-hidden", className]}>
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-75"></div>
+    <div class="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+  </div>
+  <div class="relative z-10">
+    <slot />
+  </div>
+</div>
+
+<style>
+  @keyframes pulse {
+    50% {
+      opacity: .5;
+    }
+  }
+</style>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ui\BenefitGrid.astro
+================================================================================
+
+---
+interface Benefit {
+  icon: any;
+  title: string;
+  description: string;
+  metrics?: {
+    value: string;
+    label: string;
+  }[];
+}
+
+interface Props {
+  items: Benefit[];
+}
+
+const { items }: Props = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {items.map((item: Benefit, index: number) => (
+    <div 
+      class="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden"
+      style={`animation-delay: ${index * 150}ms`}
+    >
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      <div class="relative z-10">
+        <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <item.icon class="w-6 h-6 text-blue-600" />
+        </div>
+        <h3 class="text-xl font-semibold mb-4 text-gray-900">{item.title}</h3>
+        <p class="text-gray-600 mb-6">{item.description}</p>
+        {item.metrics && (
+          <div class="border-t pt-4 mt-4">
+            <div class="grid grid-cols-2 gap-4">
+              {item.metrics.map((metric: { value: string; label: string }) => (
+                <div>
+                  <p class="text-2xl font-bold text-blue-600">{metric.value}</p>
+                  <p class="text-sm text-gray-500">{metric.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .grid > div {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ui\FeatureShowcase.astro
+================================================================================
+
+---
+interface Feature {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  features: Feature[];
+  image: string;
+  reversed?: boolean;
+}
+
+const { title, description, features, image, reversed = false }: Props = Astro.props;
+---
+
+<div class:list={["py-16 relative overflow-hidden", reversed ? "bg-gray-50" : "bg-white"]}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class:list={["grid grid-cols-1 lg:grid-cols-2 gap-12 items-center", reversed ? "lg:flex-row-reverse" : ""]}>
+      <div class="relative z-10">
+        <h3 class="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+          {title}
+        </h3>
+        <p class="text-xl text-gray-600 mb-8">{description}</p>
+        <ul class="space-y-4">
+          {features.map((feature: Feature) => (
+            <li class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
+                <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 mb-1">{feature.title}</h4>
+                <p class="text-gray-600">{feature.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class:list={["relative", reversed ? "lg:order-first" : ""]}>
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl transform rotate-3"></div>
+        <img
+          src={image}
+          alt={title}
+          class="relative rounded-2xl shadow-lg transform hover:scale-[1.02] transition-transform duration-300"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ui\OrbEffect.astro
+================================================================================
+
+---
+const { className } = Astro.props;
+---
+
+<div class:list={["relative", className]}>
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute -inset-[10px] opacity-50">
+      {Array.from({ length: 3 }).map((_, i) => (
+        <div
+          class="absolute inset-0 animate-orbit"
+          style={`animation-delay: ${i * -5}s; transform: rotate(${i * 120}deg)`}
+        >
+          <div class="absolute h-[100%] w-[50%] origin-[100%_50%] animate-pulse">
+            <div class="absolute h-[100%] w-[100%] rounded-[50%] bg-gradient-to-r from-blue-500 to-purple-500 blur-[50px]" />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="relative">
+    <slot />
+  </div>
+</div>
+
+<style>
+  @keyframes orbit {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-orbit {
+    animation: orbit 20s linear infinite;
+  }
+</style>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ui\ParticleBackground.astro
+================================================================================
+
+---
+const { className } = Astro.props;
+---
+
+<div class:list={["relative overflow-hidden", className]}>
+  <div class="absolute inset-0">
+    <div class="absolute h-[200%] w-full">
+      {Array.from({ length: 20 }).map((_, i) => (
+        <div
+          class="absolute bg-gradient-to-b from-blue-500/20 to-purple-500/20 [mask-image:linear-gradient(to_bottom,white,transparent)]"
+          style={`
+            height: 40%;
+            width: 2px;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            animation: fall ${5 + Math.random() * 5}s linear infinite;
+            animation-delay: -${Math.random() * 5}s;
+          `}
+        />
+      ))}
+    </div>
+  </div>
+  <div class="relative">
+    <slot />
+  </div>
+</div>
+
+<style>
+  @keyframes fall {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+</style>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ui\ProcessSteps.astro
+================================================================================
+
+---
+interface Step {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps }: Props = Astro.props;
+---
+
+<div class="relative">
+  <div class="absolute inset-0 h-1/2 bg-gradient-to-b from-gray-50"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+      {steps.map((step: Step, index: number) => (
+        <div class="group relative pb-10 last:pb-0">
+          {index !== steps.length - 1 && (
+            <div class="absolute left-8 top-14 h-full w-0.5 bg-gray-200 group-hover:bg-blue-500 transition-colors"></div>
+          )}
+          <div class="relative flex items-start group">
+            <span class="h-16 w-16 rounded-full border-2 border-blue-500 bg-white flex items-center justify-center text-2xl font-bold text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+              {index + 1}
+            </span>
+            <div class="ml-6 pt-3">
+              <h3 class="font-bold text-xl text-gray-900 group-hover:text-blue-600 transition-colors">
+                {step.title}
+              </h3>
+              <p class="mt-2 text-gray-600">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ui\ShinyButton.astro
+================================================================================
+
+---
+const { text, className } = Astro.props;
+---
+
+<button
+  class:list={[
+    "relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50",
+    className
+  ]}
+>
+  <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2E8F0_0%,#60A5FA_50%,#E2E8F0_100%)]" />
+  <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-6 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+    {text}
+  </span>
+</button>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ui\StatCard.astro
+================================================================================
+
+---
+const { stat, description, className } = Astro.props;
+---
+
+<div class:list={["group relative overflow-hidden rounded-xl bg-gradient-to-b from-blue-50 to-white p-6 shadow-lg transition-all hover:shadow-xl", className]}>
+  <div class="relative z-10">
+    <p class="text-4xl font-bold text-blue-900 transition-transform group-hover:scale-110">
+      {stat}
+    </p>
+    <p class="mt-2 text-sm text-gray-600">
+      {description}
+    </p>
+  </div>
+  <div class="absolute -inset-4 z-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 blur transition-all group-hover:opacity-100"></div>
+</div>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\components\ui\SuccessTimeline.astro
+================================================================================
+
+---
+import type { LucideProps } from 'lucide-astro';
+
+interface Story {
+  day: string;
+  milestone: string;
+  metric: string;
+  metricLabel: string;
+  description: string;
+  tools: string[];
+  icon: (props: LucideProps) => any;
+}
+
+interface Props {
+  stories: Story[];
+}
+
+const { stories } = Astro.props;
+---
+
+<div class="relative">
+  <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+  
+  <div class="space-y-16">
+    {stories.map((story, index) => {
+      const IconComponent = story.icon;
+      return (
+        <div class:list={[
+          "relative flex items-center",
+          index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+        ]}>
+          {/* Timeline dot */}
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50"></div>
+          
+          {/* Content card */}
+          <div class:list={[
+            "w-1/2 group",
+            index % 2 === 0 ? "pr-12" : "pl-12"
+          ]}>
+            <div class="bg-white rounded-2xl shadow-xl p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl relative overflow-hidden">
+              {/* Background gradient effect */}
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              {/* Content */}
+              <div class="relative">
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+                    <IconComponent class="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-bold text-gray-900">{story.day}</h3>
+                    <p class="text-blue-600 font-semibold">{story.milestone}</p>
+                  </div>
+                </div>
+                
+                <div class="space-y-4">
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+                      {story.metric}
+                    </span>
+                    <span class="text-gray-600">{story.metricLabel}</span>
+                  </div>
+                  
+                  <p class="text-gray-600">{story.description}</p>
+                  
+                  {story.tools && (
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                      <p class="text-sm font-semibold text-gray-900 mb-2">Tools Used:</p>
+                      <div class="flex flex-wrap gap-2">
+                        {story.tools.map(tool => (
+                          <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\layouts\Layout.astro
+================================================================================
+
+---
+interface Props {
+  title: string;
+}
+
+import ThemeToggle from '../components/ThemeToggle.astro';
+import Footer from '../components/Footer.astro';
+const { title } = Astro.props;
+
+// Add cache control headers
+Astro.response.headers.set('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Power Your E-commerce Success with Helium 10 - The all-in-one suite of tools and training for Amazon and Walmart sellers">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Performance optimizations -->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="index, follow">
+    
+    <title>{title}</title>
+  </head>
+  <body class="bg-white text-gray-900 min-h-screen">
+    <ThemeToggle />
+    <main class="bg-white">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: light;
+    --theme-transition-duration: 0.3s;
+  }
+
+  .theme-transition {
+    transition: background-color var(--theme-transition-duration) ease,
+                color var(--theme-transition-duration) ease,
+                border-color var(--theme-transition-duration) ease,
+                fill var(--theme-transition-duration) ease,
+                stroke var(--theme-transition-duration) ease;
+  }
+  
+  /* Optimize CSS performance */
+  img, svg {
+    @apply transform-gpu;
+  }
+  
+  /* Reduce layout shift */
+  main {
+    @apply overflow-x-hidden;
+  }
+</style>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\pages\cookies.astro
+================================================================================
+
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Cookie Policy - Helium 10">
+  <div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8">Cookie Policy</h1>
+    
+    <div class="prose max-w-none">
+      <p class="mb-6">Last updated: February 13, 2025</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">1. What Are Cookies</h2>
+      <p class="mb-4">Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently and provide a better user experience.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">2. How We Use Cookies</h2>
+      <p class="mb-4">We use cookies for the following purposes:</p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Essential cookies: These are necessary for the website to function properly</li>
+        <li>Analytical/performance cookies: These help us analyze how visitors use our website</li>
+        <li>Functionality cookies: These enable enhanced functionality and personalization</li>
+        <li>Targeting/advertising cookies: These help deliver more relevant advertisements</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">3. Types of Cookies We Use</h2>
+      <h3 class="text-xl font-semibold mt-6 mb-3">3.1 Essential Cookies</h3>
+      <p class="mb-4">These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms.</p>
+
+      <h3 class="text-xl font-semibold mt-6 mb-3">3.2 Analytics Cookies</h3>
+      <p class="mb-4">These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site.</p>
+
+      <h3 class="text-xl font-semibold mt-6 mb-3">3.3 Marketing Cookies</h3>
+      <p class="mb-4">These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">4. Managing Cookies</h2>
+      <p class="mb-4">Most web browsers allow you to control cookies through their settings preferences. However, if you limit the ability of websites to set cookies, you may worsen your overall user experience.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">5. Cookie Settings</h2>
+      <p class="mb-4">You can change your cookie preferences at any time by clicking on the 'Cookie Settings' button in the footer of our website. You can also manage cookies through your web browser settings.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">6. Contact Us</h2>
+      <p class="mb-4">If you have any questions about our use of cookies, please contact us at:</p>
+      <ul class="list-none mb-4">
+        <li>Email: support@helium10.com</li>
+        <li>Phone: (800) 695-0251</li>
+        <li>Address: 801-807 N Federal Blvd, Riverton, WY 82501</li>
+      </ul>
+    </div>
+  </div>
+</Layout>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\pages\index.astro
+================================================================================
+
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import AnimatedBackground from '../components/ui/AnimatedBackground.astro';
+import OrbEffect from '../components/ui/OrbEffect.astro';
+import ParticleBackground from '../components/ui/ParticleBackground.astro';
+import StatCard from '../components/ui/StatCard.astro';
+import ShinyButton from '../components/ui/ShinyButton.astro';
+import FeatureShowcase from '../components/ui/FeatureShowcase.astro';
+import ProcessSteps from '../components/ui/ProcessSteps.astro';
+import BenefitGrid from '../components/ui/BenefitGrid.astro';
+import SuccessTimeline from '../components/ui/SuccessTimeline.astro';
+import { AFFILIATE_URL } from '../config/constants.js';
+import {
+  Search,
+  BarChart,
+  TrendingUp,
+  Target,
+  ShoppingCart,
+  Users,
+  Star,
+  CheckCircle,
+  ArrowRight,
+  Zap,
+  DollarSign,
+  LineChart,
+  Brain,
+  Rocket,
+  Shield,
+  Clock,
+  Award,
+  Lightbulb,
+  BarChart2
+} from 'lucide-astro';
+
+// Features data
+const features = {
+  'Product Research': {
+    icon: Search,
+    description: 'Find winning products with our advanced AI-powered research tools'
+  },
+  'Competitor Analysis': {
+    icon: BarChart,
+    description: 'Track competitors and identify market opportunities'
+  },
+  'Keyword Optimization': {
+    icon: TrendingUp,
+    description: 'Optimize listings with high-converting keywords'
+  },
+  'Profit Calculator': {
+    icon: Target,
+    description: 'Calculate profitability and ROI before investing'
+  }
+};
+
+// Stats data
+const stats = [
+  { stat: '500K+', description: 'Active Sellers' },
+  { stat: '$2.1B+', description: 'Revenue Generated' },
+  { stat: '98%', description: 'Customer Satisfaction' },
+  { stat: '24/7', description: 'Expert Support' }
+];
+
+// Testimonials
+const testimonials = [
+  {
+    quote: "Helium 10 transformed my Amazon business. I've seen a 300% increase in sales since using their tools.",
+    author: "Sarah Johnson",
+    role: "6-Figure Amazon Seller"
+  },
+  {
+    quote: "The keyword research tools are incredible. My products now rank higher than ever before.",
+    author: "Michael Chen",
+    role: "E-commerce Entrepreneur"
+  }
+];
+
+// Add new data structures for enhanced sections
+const detailedFeatures = [
+  {
+    title: "Advanced Product Research Suite",
+    description: "Discover winning products and untapped niches with our AI-powered research tools.",
+    image: "/images/product-research.jpg",
+    features: [
+      {
+        title: "Black Box Product Finder",
+        description: "Uncover profitable products using advanced filters and AI-driven recommendations."
+      },
+      {
+        title: "Competitor Analysis",
+        description: "Track competitor performance, pricing strategies, and market trends."
+      },
+      {
+        title: "Demand Forecasting",
+        description: "Predict product demand using historical data and market trends."
+      }
+    ]
+  },
+  {
+    title: "Keyword Optimization Engine",
+    description: "Optimize your listings with high-converting keywords and outrank your competition.",
+    image: "/images/keyword-optimization.jpg",
+    features: [
+      {
+        title: "Cerebro Keyword Research",
+        description: "Find high-traffic keywords your competitors are ranking for."
+      },
+      {
+        title: "Smart Keyword Integration",
+        description: "Optimize your listings with the perfect keyword density and placement."
+      },
+      {
+        title: "Rank Tracking",
+        description: "Monitor your keyword rankings and adjust strategy in real-time."
+      }
+    ]
+  }
+];
+
+const processSteps = [
+  {
+    title: "Research Your Market",
+    description: "Use our Black Box tool to find profitable niches and products with high demand and low competition."
+  },
+  {
+    title: "Optimize Your Listings",
+    description: "Leverage our keyword research tools to create high-ranking product listings that convert."
+  },
+  {
+    title: "Track Performance",
+    description: "Monitor your rankings, sales, and profitability with real-time analytics and alerts."
+  },
+  {
+    title: "Scale Your Business",
+    description: "Use our automation tools to manage inventory, customer service, and business operations efficiently."
+  }
+];
+
+const benefits = [
+  {
+    icon: Zap,
+    title: "10x Faster Research",
+    description: "Cut your product research time from days to hours with AI-powered insights.",
+    metrics: [
+      { value: "90%", label: "Time Saved" },
+      { value: "2hrs", label: "Avg. Research Time" }
+    ]
+  },
+  {
+    icon: TrendingUp,
+    title: "Higher Rankings",
+    description: "Achieve better search rankings with optimized listings and strategic keyword placement.",
+    metrics: [
+      { value: "+127%", label: "Avg. Rank Improvement" },
+      { value: "Top 3", label: "Typical Position" }
+    ]
+  },
+  {
+    icon: DollarSign,
+    title: "Increased Profits",
+    description: "Maximize your margins with competitive pricing and inventory management.",
+    metrics: [
+      { value: "+65%", label: "Profit Increase" },
+      { value: "$2.1B+", label: "User Revenue" }
+    ]
+  },
+  {
+    icon: LineChart,
+    title: "Market Intelligence",
+    description: "Stay ahead of trends with real-time market data and competitor insights.",
+    metrics: [
+      { value: "24/7", label: "Market Monitoring" },
+      { value: "500K+", label: "Products Tracked" }
+    ]
+  },
+  {
+    icon: Brain,
+    title: "AI-Powered Insights",
+    description: "Make data-driven decisions with machine learning algorithms and predictive analytics.",
+    metrics: [
+      { value: "99%", label: "Accuracy Rate" },
+      { value: "1M+", label: "Daily Predictions" }
+    ]
+  },
+  {
+    icon: Shield,
+    title: "Risk Management",
+    description: "Protect your business with inventory alerts and market trend warnings.",
+    metrics: [
+      { value: "-80%", label: "Risk Reduction" },
+      { value: "100%", label: "Stock Protection" }
+    ]
+  }
+];
+
+const successStories = [
+  {
+    day: "Day 1",
+    milestone: "Market Research",
+    metric: "127",
+    metricLabel: "Potential Products Found",
+    description: "Using Black Box, discovered high-potential niches in the pet accessories market with low competition and high demand.",
+    tools: ["Black Box", "Market Tracker"],
+    icon: Search
+  },
+  {
+    day: "Week 1",
+    milestone: "Product Selection",
+    metric: "$42K",
+    metricLabel: "Monthly Revenue Potential",
+    description: "Identified the perfect product using Helium 10's profitability calculator and competitor analysis tools.",
+    tools: ["Cerebro", "Profitability Calculator"],
+    icon: Target
+  },
+  {
+    day: "Month 1",
+    milestone: "Launch Success",
+    metric: "Page 1",
+    metricLabel: "Amazon Rankings",
+    description: "Optimized listings with high-converting keywords and achieved first-page rankings for main search terms.",
+    tools: ["Cerebro", "Magnet", "Scribbles"],
+    icon: Rocket
+  },
+  {
+    day: "Month 3",
+    milestone: "Business Scaling",
+    metric: "$127K",
+    metricLabel: "Monthly Revenue",
+    description: "Expanded to multiple variations and launched in international marketplaces using Market Tracker insights.",
+    tools: ["Market Tracker", "Inventory Protector"],
+    icon: BarChart2
+  },
+  {
+    day: "Month 6",
+    milestone: "Brand Growth",
+    metric: "4.8",
+    metricLabel: "Star Rating",
+    description: "Maintained excellent product quality and customer satisfaction while scaling to 7 figures annually.",
+    tools: ["Review Insights", "Brand Analytics"],
+    icon: Star
+  }
+];
+
+---
+
+<Layout title="Helium 10 - Power Your E-commerce Success">
+  <Header />
+  
+  <!-- Hero Section with OrbEffect -->
+  <OrbEffect className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-5xl mx-auto">
+      <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text mb-8">
+        Dominate E-commerce with
+        <span class="block mt-2">Data-Driven Precision</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
+        Join over 500,000 sellers using Helium 10's suite of tools to find winning products,
+        optimize listings, and scale their e-commerce empire.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <ShinyButton
+          text="Start Your Journey"
+          className="w-full sm:w-auto text-lg"
+        />
+        <a href="#features" class="group flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+          <span>See How It Works</span>
+          <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+    </div>
+  </OrbEffect>
+
+  <!-- Stats Section with ParticleBackground -->
+  <ParticleBackground className="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {stats.map(({ stat, description }) => (
+          <StatCard stat={stat} description={description} />
+        ))}
+      </div>
+    </div>
+  </ParticleBackground>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-16">
+        Everything You Need to
+        <span class="text-blue-600">Scale Your Business</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {Object.entries(features).map(([title, { icon: Icon, description }]) => (
+          <div class="group relative p-8 rounded-2xl bg-gradient-to-b from-gray-50 to-white shadow-lg hover:shadow-xl transition-all">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div class="relative">
+              <Icon class="w-12 h-12 text-blue-600 mb-4" />
+              <h3 class="text-2xl font-semibold mb-4">{title}</h3>
+              <p class="text-gray-600">{description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Feature Showcases -->
+  {detailedFeatures.map((feature, index) => (
+    <FeatureShowcase
+      title={feature.title}
+      description={feature.description}
+      features={feature.features}
+      image={feature.image}
+      reversed={index % 2 !== 0}
+    />
+  ))}
+
+  <!-- How It Works Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold">
+          How to Scale Your
+          <span class="text-blue-600">E-commerce Empire</span>
+        </h2>
+        <p class="mt-4 text-xl text-gray-600">
+          Follow our proven process to build and scale your online business
+        </p>
+      </div>
+      <ProcessSteps steps={processSteps} />
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold">
+          Transform Your Business with
+          <span class="text-blue-600">Data-Driven Tools</span>
+        </h2>
+        <p class="mt-4 text-xl text-gray-600">
+          See how our suite of tools can revolutionize your e-commerce strategy
+        </p>
+      </div>
+      <BenefitGrid items={benefits} />
+    </div>
+  </section>
+<!-- Featured Video Section -->
+<section class="video-section min-h-screen flex flex-col justify-center bg-white dark:bg-gray-900 relative overflow-hidden">
+  <!-- Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-gray-50/50 dark:from-gray-800/50"></div>
+
+  <!-- Header Content -->
+  <div class="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h2 class="responsive-text-4xl md:text-6xl font-bold dark:text-gray-100 mb-8">
+      See Helium 10 in
+      <span class="text-blue-600 dark:text-blue-400">Action</span>
+    </h2>
+    <p class="responsive-text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
+      Watch how successful sellers are using Helium 10 to build their e-commerce empires
+    </p>
+  </div>
+
+  <!-- Video Container -->
+  <div class="relative z-10 flex justify-center items-center w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+    <div class="w-full video-wrapper bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-2xl dark:shadow-blue-500/20">
+      <div class="relative w-full" style="padding-top: 56.25%;">
+        <iframe
+          class="absolute inset-0 w-full h-full"
+          src="https://www.youtube.com/embed/ELJSdDAU_oE"
+          title="Helium 10 Success Story"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- CTA Section -->
+    <div class="responsive-container relative py-20">
+      <div class="text-center">
+        <p class="text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto text-xl leading-relaxed">
+          Ready to transform your Amazon business? Join thousands of successful sellers who have already discovered the power of Helium 10.
+        </p>
+        <a
+          href={AFFILIATE_URL}
+          class="inline-block px-10 py-5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-xl font-semibold"
+        >
+          Start Your Success Story Today
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Timeline Section -->
+  <section class="responsive-spacing-y bg-gray-50 dark:bg-gray-800 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-white/50 dark:from-gray-900/50"></div>
+    <div class="responsive-container relative">
+      <div class="text-center mb-16">
+        <h2 class="responsive-text-4xl font-bold dark:text-gray-100">
+          Your Journey to
+          <span class="text-blue-600 dark:text-blue-400">E-commerce Success</span>
+        </h2>
+        <p class="responsive-text-xl mt-4 text-gray-600 dark:text-gray-300">
+          Follow the proven path of successful sellers who built their empires with Helium 10
+        </p>
+      </div>
+      
+      <SuccessTimeline stories={successStories} />
+      
+      <div class="mt-16 text-center">
+        <ShinyButton href={AFFILIATE_URL} className="responsive-text-lg px-8 py-4 dark:bg-gray-800 dark:text-white">
+          Start Your Success Story
+          <ArrowRight className="w-5 h-5 ml-2" />
+        </ShinyButton>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Win Cards Section -->
+  <section class="responsive-spacing-y bg-white dark:bg-gray-900">
+    <div class="responsive-container">
+      <div class="text-center mb-16">
+        <h2 class="responsive-text-4xl font-bold dark:text-gray-100">
+          Quick Wins with
+          <span class="text-blue-600 dark:text-blue-400">Helium 10</span>
+        </h2>
+        <p class="responsive-text-xl mt-4 text-gray-600 dark:text-gray-300">
+          Real results our users achieved in their first week
+        </p>
+      </div>
+      
+      <div class="responsive-grid">
+        {[
+          {
+            title: "Keyword Gold Mine",
+            description: "Found 347 high-volume, low-competition keywords in just 2 hours using Cerebro",
+            metric: "347",
+            metricLabel: "Keywords Found",
+            icon: Lightbulb
+          },
+          {
+            title: "Instant Rankings",
+            description: "Achieved page 1 rankings for 5 main keywords within 72 hours of optimization",
+            metric: "72h",
+            metricLabel: "To Page 1",
+            icon: TrendingUp
+          },
+          {
+            title: "Profit Maximizer",
+            description: "Increased profit margins by 23% by optimizing pricing with Market Tracker",
+            metric: "+23%",
+            metricLabel: "Profit Increase",
+            icon: DollarSign
+          }
+        ].map(win => {
+          const WinIcon = win.icon;
+          return (
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-blue-500/10 p-8 relative group hover-lift overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="relative">
+                <div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-6">
+                  <WinIcon class="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">{win.title}</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">{win.description}</p>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-3xl font-bold text-blue-600 dark:text-blue-400">{win.metric}</span>
+                  <span class="text-gray-500 dark:text-gray-400">{win.metricLabel}</span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Stories Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold">
+          Real Results from
+          <span class="text-blue-600">Real Sellers</span>
+        </h2>
+        <p class="mt-4 text-xl text-gray-600">
+          Join thousands of successful sellers who have transformed their business with Helium 10
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            metric: "$1.2M",
+            label: "Monthly Revenue",
+            quote: "Helium 10's tools helped me identify the perfect product niche and optimize my listings for maximum visibility.",
+            author: "David Chen",
+            role: "Top 1% Amazon Seller"
+          },
+          {
+            metric: "483%",
+            label: "YoY Growth",
+            quote: "The keyword research tools are incredible. My products now consistently rank on the first page.",
+            author: "Sarah Thompson",
+            role: "E-commerce Entrepreneur"
+          },
+          {
+            metric: "12",
+            label: "Best Sellers",
+            quote: "From product research to optimization, Helium 10 has been crucial in scaling my business across multiple categories.",
+            author: "Michael Rodriguez",
+            role: "Multi-Category Seller"
+          }
+        ].map(story => (
+          <div class="bg-white rounded-2xl shadow-lg p-8 relative group hover:shadow-xl transition-shadow">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="relative">
+              <div class="mb-6">
+                <p class="text-4xl font-bold text-blue-600">{story.metric}</p>
+                <p class="text-gray-600">{story.label}</p>
+              </div>
+              <blockquote class="text-gray-600 mb-6">"{story.quote}"</blockquote>
+              <div>
+                <cite class="font-semibold text-gray-900 not-italic">{story.author}</cite>
+                <p class="text-sm text-gray-500">{story.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Partners Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold">
+          Seamlessly Integrates with Your
+          <span class="text-blue-600">Favorite Platforms</span>
+        </h2>
+        <p class="mt-4 text-xl text-gray-600">
+          Connect Helium 10 with the tools you already use
+        </p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {[
+          "Amazon",
+          "Walmart",
+          "Shopify",
+          "WooCommerce"
+        ].map(platform => (
+          <div class="bg-white rounded-xl p-6 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+            <span class="text-xl font-semibold text-gray-900">{platform}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section with AnimatedBackground -->
+  <AnimatedBackground className="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-bold text-center text-white mb-16">
+        Trusted by Industry Leaders
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {testimonials.map(({ quote, author, role }) => (
+          <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg">
+            <Star class="w-8 h-8 text-yellow-400 mb-6" />
+            <blockquote class="text-white text-lg mb-6">{quote}</blockquote>
+            <div>
+              <cite class="text-white font-semibold not-italic">{author}</cite>
+              <p class="text-blue-200 text-sm">{role}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </AnimatedBackground>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-8">
+        Ready to Transform Your
+        <span class="text-blue-600">E-commerce Business?</span>
+      </h2>
+      <p class="text-xl text-gray-600 mb-12">
+        Join thousands of successful sellers who have already taken their business to the next level with Helium 10.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <ShinyButton
+          text="Get Started Now"
+          className="w-full sm:w-auto text-lg"
+        />
+        <a href="#pricing" class="text-gray-600 hover:text-blue-600 transition-colors">
+          View Pricing Plans →
+        </a>
+      </div>
+      <div class="mt-12 flex items-center justify-center gap-4 text-sm text-gray-500">
+        <span class="flex items-center gap-2">
+          <CheckCircle class="w-5 h-5 text-green-500" />
+          14-Day Free Trial
+        </span>
+        <span class="flex items-center gap-2">
+          <CheckCircle class="w-5 h-5 text-green-500" />
+          No Credit Card Required
+        </span>
+      </div>
+    </div>
+  </section>
+
+ 
+</Layout>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\pages\pricing.astro
+================================================================================
+
+---
+import Layout from '../layouts/Layout.astro';
+
+const plans = [
+  {
+    name: 'Starter',
+    price: 29,
+    description: 'The training and tools you need to get started',
+    features: {
+      'Product Research': {
+        'Black Box': 'Limited',
+        'Xray': '✓',
+        'Xray for Walmart': 'Limited'
+      },
+      'Keyword Research': {
+        'Cerebro': 'Limited',
+        'Magnet': 'Limited',
+        'Xray Keywords': '5 uses'
+      },
+      'Analytics': {
+        'My Products': '20',
+        'Keyword Tracker': '500 keywords',
+        'Keyword Tracker for Walmart': '100 keywords',
+        'Market Tracker': 'Up to 1 Market'
+      },
+      'Operations': {
+        'Alerts': '2 products',
+        'Follow-Up': '5,000 emails',
+        'Inventory Management': 'Limited'
+      }
+    },
+    highlight: false
+  },
+  {
+    name: 'Platinum',
+    price: 79,
+    description: 'The must-have solution for your growing business',
+    features: {
+      'Product Research': {
+        'Black Box': '✓',
+        'Xray': '✓',
+        'Xray for Walmart': '✓'
+      },
+      'Keyword Research': {
+        'Cerebro': '✓',
+        'Magnet': '✓',
+        'Xray Keywords': '✓'
+      },
+      'Analytics': {
+        'My Products': '1,000',
+        'Keyword Tracker': '2,500 keywords',
+        'Keyword Tracker for Walmart': '250 keywords',
+        'Market Tracker': 'Up to 3 Markets'
+      },
+      'Operations': {
+        'Alerts': '20 products',
+        'Follow-Up': '15,000 emails',
+        'Inventory Management': 'Up to 40 SKUs'
+      }
+    },
+    highlight: true
+  },
+  {
+    name: 'Diamond',
+    price: 229,
+    description: 'Perfect for expert sellers looking to scale',
+    features: {
+      'Product Research': {
+        'Black Box': '✓',
+        'Xray': '✓',
+        'Xray for Walmart': '✓'
+      },
+      'Keyword Research': {
+        'Cerebro': '✓',
+        'Magnet': '✓',
+        'Xray Keywords': '✓'
+      },
+      'Analytics': {
+        'My Products': '1,000',
+        'Keyword Tracker': '2,500 keywords',
+        'Keyword Tracker for Walmart': '250 keywords',
+        'Market Tracker': 'Up to 5 Markets'
+      },
+      'Operations': {
+        'Alerts': '200 products',
+        'Follow-Up': '15,000 emails',
+        'Inventory Management': '✓'
+      }
+    },
+    highlight: false
+  }
+];
+---
+
+<Layout title="Pricing - Helium 10">
+  <main class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <div class="text-center">
+        <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">
+          Plans & Pricing
+        </h1>
+        <p class="mt-4 text-xl text-gray-600">
+          Powerful plans for every stage of your seller journey
+        </p>
+        <div class="mt-4 inline-flex items-center bg-blue-50 rounded-full px-4 py-2">
+          <span class="text-blue-600 font-medium">🚀 Join the other 9,824 people who signed up last week</span>
+        </div>
+      </div>
+
+      <!-- Pricing Toggle -->
+      <div class="relative mt-12 flex justify-center">
+        <div class="flex items-center space-x-3">
+          <span class="text-sm font-medium text-gray-900">Monthly</span>
+          <button type="button" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none" role="switch" aria-checked="false">
+            <span class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+          <span class="text-sm font-medium text-gray-900">Annual <span class="text-green-500">(Save 25%)</span></span>
+        </div>
+      </div>
+
+      <!-- Pricing Cards -->
+      <div class="mt-12 space-y-4 sm:mt-16 sm:grid sm:grid-cols-3 sm:gap-6 sm:space-y-0">
+        {plans.map((plan) => (
+          <div class={`rounded-lg shadow-lg divide-y divide-gray-200 ${plan.highlight ? 'ring-2 ring-blue-500' : ''}`}>
+            <div class="p-6">
+              {plan.highlight && (
+                <span class="inline-flex px-4 py-1 rounded-full text-sm font-semibold tracking-wide uppercase bg-blue-100 text-blue-600 mb-4">
+                  Most popular
+                </span>
+              )}
+              <h2 class="text-2xl font-semibold text-gray-900">{plan.name}</h2>
+              <p class="mt-4 text-sm text-gray-500">{plan.description}</p>
+              <p class="mt-8">
+                <span class="text-4xl font-extrabold text-gray-900">${plan.price}</span>
+                <span class="text-base font-medium text-gray-500">/mo</span>
+              </p>
+              <a href="#" class={`mt-8 block w-full bg-${plan.highlight ? 'blue' : 'gray'}-600 hover:bg-${plan.highlight ? 'blue' : 'gray'}-700 border border-transparent rounded-md py-3 px-6 text-center font-medium text-white`}>
+                Buy Now
+              </a>
+            </div>
+            <div class="px-6 pt-6 pb-8">
+              <h3 class="text-xs font-semibold text-gray-900 tracking-wide uppercase">What's included</h3>
+              <ul role="list" class="mt-6 space-y-4">
+                {Object.entries(plan.features).map(([category, features]) => (
+                  <li>
+                    <div class="font-medium text-gray-900 mb-2">{category}</div>
+                    {Object.entries(features).map(([feature, value]) => (
+                      <div class="flex items-center text-sm text-gray-500 mb-1">
+                        <span class="flex-grow">{feature}</span>
+                        <span class={`ml-2 ${value === '✓' ? 'text-green-500' : value === 'Limited' ? 'text-orange-500' : ''}`}>
+                          {value}
+                        </span>
+                      </div>
+                    ))}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Add-ons Section -->
+      <div class="mt-16">
+        <h2 class="text-3xl font-bold text-center text-gray-900">Powerful Add-ons</h2>
+        <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-900">Exclusive Training</h3>
+            <p class="mt-4 text-gray-600">Networking and training reserved exclusively for top-tier sellers looking to scale faster</p>
+            <p class="mt-4">
+              <span class="text-2xl font-bold text-gray-900">$99</span>
+              <span class="text-gray-500">/mo</span>
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-900">Market Intelligence</h3>
+            <p class="mt-4 text-gray-600">Access the most accurate insights to grow your business and outperform your competitors</p>
+            <p class="mt-4">
+              <span class="text-2xl font-bold text-gray-900">$500</span>
+              <span class="text-gray-500">/mo</span>
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-900">Elite Package</h3>
+            <p class="mt-4 text-gray-600">Advanced features and priority support for power users</p>
+            <p class="mt-4">
+              <span class="text-2xl font-bold text-gray-900">$99</span>
+              <span class="text-gray-500">/mo</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="mt-16">
+        <h2 class="text-3xl font-bold text-center text-gray-900">Frequently Asked Questions</h2>
+        <dl class="mt-8 space-y-6 divide-y divide-gray-200">
+          <div class="pt-6">
+            <dt class="text-lg">
+              <button class="text-left w-full flex justify-between items-start text-gray-400">
+                <span class="font-medium text-gray-900">What's included in each plan?</span>
+                <span class="ml-6 h-7 flex items-center">
+                  <svg class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+            </dt>
+            <dd class="mt-2 pr-12">
+              <p class="text-base text-gray-500">Each plan includes a different set of features optimized for different stages of your seller journey. The Starter plan is perfect for beginners, Platinum for growing businesses, and Diamond for expert sellers looking to scale.</p>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Custom styles can be added here */
+  .feature-progress {
+    @apply h-2 bg-gray-200 rounded-full overflow-hidden;
+  }
+  
+  .feature-progress-bar {
+    @apply h-full bg-blue-500 transition-all duration-300;
+  }
+</style>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\pages\privacy-policy.astro
+================================================================================
+
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy Policy - Helium 10">
+  <div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8">Privacy Policy</h1>
+    
+    <div class="prose max-w-none">
+      <p class="mb-6">Last updated: February 13, 2025</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">1. Introduction</h2>
+      <p class="mb-4">Welcome to Helium 10. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">2. Data We Collect</h2>
+      <p class="mb-4">We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:</p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Identity Data</li>
+        <li>Contact Data</li>
+        <li>Technical Data</li>
+        <li>Usage Data</li>
+        <li>Marketing and Communications Data</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">3. How We Use Your Data</h2>
+      <p class="mb-4">We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:</p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Where we need to perform the contract we are about to enter into or have entered into with you</li>
+        <li>Where it is necessary for our legitimate interests and your interests</li>
+        <li>Where we need to comply with a legal obligation</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">4. Data Security</h2>
+      <p class="mb-4">We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">5. Your Legal Rights</h2>
+      <p class="mb-4">Under certain circumstances, you have rights under data protection laws in relation to your personal data, including:</p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>The right to access your personal data</li>
+        <li>The right to correction of your personal data</li>
+        <li>The right to erasure of your personal data</li>
+        <li>The right to object to processing of your personal data</li>
+        <li>The right to data portability</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">6. Contact Us</h2>
+      <p class="mb-4">If you have any questions about this privacy policy or our privacy practices, please contact us at:</p>
+      <p class="mb-4">Email: privacy@helium10.com</p>
+    </div>
+  </div>
+</Layout>
+
+
+================================================================================
+FILE: c:\personal\LandingPage Affialte SEO\final_2\tryhelium10\AstroHelium\src\pages\terms.astro
+================================================================================
+
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Terms of Service - Helium 10">
+  <div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8">Terms of Service</h1>
+    
+    <div class="prose max-w-none">
+      <p class="mb-6">Last updated: February 13, 2025</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">1. Agreement to Terms</h2>
+      <p class="mb-4">By accessing and using Helium 10's website and services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">2. Use License</h2>
+      <p class="mb-4">Permission is granted to temporarily access the materials (information or software) on Helium 10's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Modify or copy the materials</li>
+        <li>Use the materials for any commercial purpose</li>
+        <li>Attempt to decompile or reverse engineer any software contained on the website</li>
+        <li>Remove any copyright or other proprietary notations from the materials</li>
+        <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">3. Subscription Terms</h2>
+      <p class="mb-4">Access to Helium 10's services requires a subscription. By subscribing to our services, you agree to:</p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Provide accurate and complete information for billing purposes</li>
+        <li>Pay all charges associated with your subscription when due</li>
+        <li>Maintain the security of your account credentials</li>
+        <li>Accept responsibility for all activities that occur under your account</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">4. Disclaimer</h2>
+      <p class="mb-4">The materials on Helium 10's website are provided on an 'as is' basis. Helium 10 makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">5. Limitations</h2>
+      <p class="mb-4">In no event shall Helium 10 or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Helium 10's website.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">6. Accuracy of Materials</h2>
+      <p class="mb-4">The materials appearing on Helium 10's website could include technical, typographical, or photographic errors. Helium 10 does not warrant that any of the materials on its website are accurate, complete, or current.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">7. Links</h2>
+      <p class="mb-4">Helium 10 has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Helium 10 of the site.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">8. Modifications</h2>
+      <p class="mb-4">Helium 10 may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">9. Governing Law</h2>
+      <p class="mb-4">These terms and conditions are governed by and construed in accordance with the laws of the United States and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
+
+      <h2 class="text-2xl font-semibold mt-8 mb-4">10. Contact Information</h2>
+      <p class="mb-4">If you have any questions about these Terms of Service, please contact us:</p>
+      <ul class="list-none mb-4">
+        <li>Email: support@helium10.com</li>
+        <li>Phone: (800) 695-0251</li>
+        <li>Address: 801-807 N Federal Blvd, Riverton, WY 82501</li>
+      </ul>
+    </div>
+  </div>
+</Layout>
+

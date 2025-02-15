@@ -1,0 +1,84 @@
+---
+interface Story {
+  day: string;
+  milestone: string;
+  metric: string;
+  metricLabel: string;
+  description: string;
+  tools: string[];
+  icon: any;
+}
+
+interface Props {
+  stories: Story[];
+}
+
+const { stories } = Astro.props;
+---
+
+<div class="relative">
+  <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+  
+  <div class="space-y-16">
+    {stories.map((story, index) => {
+      const IconComponent = story.icon;
+      return (
+        <div class:list={[
+          "relative flex items-center",
+          index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+        ]}>
+          {/* Timeline dot */}
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50"></div>
+          
+          {/* Content card */}
+          <div class:list={[
+            "w-1/2 group",
+            index % 2 === 0 ? "pr-12" : "pl-12"
+          ]}>
+            <div class="bg-white rounded-2xl shadow-xl p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl relative overflow-hidden">
+              {/* Background gradient effect */}
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              {/* Content */}
+              <div class="relative">
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+                    <IconComponent class="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-bold text-gray-900">{story.day}</h3>
+                    <p class="text-blue-600 font-semibold">{story.milestone}</p>
+                  </div>
+                </div>
+                
+                <div class="space-y-4">
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+                      {story.metric}
+                    </span>
+                    <span class="text-gray-600">{story.metricLabel}</span>
+                  </div>
+                  
+                  <p class="text-gray-600">{story.description}</p>
+                  
+                  {story.tools && (
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                      <p class="text-sm font-semibold text-gray-900 mb-2">Tools Used:</p>
+                      <div class="flex flex-wrap gap-2">
+                        {story.tools.map(tool => (
+                          <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>

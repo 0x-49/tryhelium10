@@ -1,0 +1,97 @@
+---
+import { BarChart3 } from 'lucide-astro';
+import { AFFILIATE_URL } from '../config/constants.js';
+import ShinyButton from './ui/ShinyButton.astro';
+---
+
+<header class="bg-gradient-to-r from-blue-900 to-blue-800 text-white sticky top-0 z-50">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center space-x-2">
+        <BarChart3 class="w-8 h-8" />
+        <span class="font-bold text-xl tracking-tight">Helium 10</span>
+      </div>
+      
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#features" class="hover:text-blue-200 transition-colors">Features</a>
+        <a href="#pricing" class="hover:text-blue-200 transition-colors">Pricing</a>
+        <a href="#resources" class="hover:text-blue-200 transition-colors">Resources</a>
+        <a href="#about" class="hover:text-blue-200 transition-colors">About</a>
+      </div>
+      
+      <!-- CTA Buttons -->
+      <div class="flex items-center space-x-4">
+        <a href={AFFILIATE_URL} class="hover:text-blue-200 transition-colors hidden md:inline-block">Login</a>
+        <a
+    href={AFFILIATE_URL}
+    class="inline-block text-center w-full sm:w-auto"
+          >
+    <ShinyButton
+      text="Get Started"
+      className="w-full sm:w-auto text-lg"
+    />
+      </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button type="button" class="text-white hover:text-blue-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="hidden md:hidden">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="#features" class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">Features</a>
+        <a href="#pricing" class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">Pricing</a>
+        <a href="#resources" class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">Resources</a>
+        <a href="#about" class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">About</a>
+        <a href={AFFILIATE_URL} class="block px-3 py-2 rounded-md hover:bg-blue-800 transition-colors">Login</a>
+        <a href={AFFILIATE_URL} class="block px-3 py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition-colors text-center font-semibold">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const menuButton = document.querySelector('button[type="button"]');
+  const mobileMenu = document.querySelector('.hidden.md\\:hidden');
+  
+  menuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function (this: Document, event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('header')) {
+      mobileMenu?.classList.add('hidden');
+    }
+  });
+  
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((element) => {
+    const anchor = element as HTMLAnchorElement;
+    anchor.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault();
+      const href = anchor.getAttribute('href');
+      if (href) {
+        document.querySelector(href)?.scrollIntoView({
+          behavior: 'smooth'
+        });
+        // Close mobile menu after clicking a link
+        mobileMenu?.classList.add('hidden');
+      }
+    });
+  });
+</script>

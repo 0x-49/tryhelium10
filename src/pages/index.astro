@@ -1,11 +1,961 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import AnimatedBackground from '../components/ui/AnimatedBackground.astro';
+import OrbEffect from '../components/ui/OrbEffect.astro';
+import ParticleBackground from '../components/ui/ParticleBackground.astro';
+import StatCard from '../components/ui/StatCard.astro';
+import ShinyButton from '../components/ui/ShinyButton.astro';
+import FeatureShowcase from '../components/ui/FeatureShowcase.astro';
+import ProcessSteps from '../components/ui/ProcessSteps.astro';
+import BenefitGrid from '../components/ui/BenefitGrid.astro';
+import SuccessTimeline from '../components/ui/SuccessTimeline.astro';
+import { AFFILIATE_URL } from '../config/constants.js';
+import {
+  Search,
+  BarChart,
+  TrendingUp,
+  Target,
+  ShoppingCart,
+  Users,
+  Star,
+  CheckCircle,
+  ArrowRight,
+  Zap,
+  DollarSign,
+  LineChart,
+  Brain,
+  Rocket,
+  Shield,
+  Clock,
+  Award,
+  Lightbulb,
+  BarChart2,
+  Edit,
+  Settings,
+  GraduationCap
+} from 'lucide-astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Use a different icon, such as GraduationCap, as a placeholder for Tools
+// Ensure no variable redeclarations occur
+const additionalFeatures = {
+  'Additional Tools & Features': {
+    icon: GraduationCap,
+    description: [
+      "Keyword Tracker: Track keyword rankings over time.",
+      "Market Tracker: Monitor market trends and competitor activities.",
+      "SEO Optimization: Optimize listings with meta tags, alt text, and keyword-rich content.",
+      "Customer Support: Access real-time support via chat widgets.",
+      "Style Keywords: Add style keywords to the backend of listings for better targeting."
+    ]
+  }
+};
+
+// Features data
+const features = {
+  'Product Research': {
+    icon: Search,
+    description: [
+      "Advanced Filtering: Narrow searches with over 20 filters, including sales, revenue, price, and reviews.",
+      "Niche Identification: Discover untapped niches with high demand and low competition.",
+      "AI-Powered Insights: Leverage AI tools to validate product ideas and uncover opportunities.",
+      "Real-Time Data: Access up-to-date market data to inform strategic decisions.",
+      "Product Viability Analysis: Analyze product sales, reviews, and competition in one place.",
+      "Data Centralization: Organize all research data in a single location for seamless access."
+    ]
+  },
+  'Competitor Analysis': {
+    icon: BarChart,
+    description: [
+      "Strategy Uncovering: Analyze competitors' weaknesses and strategies using tools like Reverse ASIN Lookup.",
+      "Real-Time Tracking: Monitor competitive metrics such as review velocity and pricing wars.",
+      "Reverse ASIN Search: Identify competitor keywords using their Amazon Standard Identification Number (ASIN).",
+      "Trend Identification: Spot emerging trends to capitalize on new opportunities.",
+      "Benchmarking: Compare your performance against competitors.",
+      "Fraud Detection: Alerts for fraudulent sellers or suspicious activities."
+    ]
+  },
+  'Keyword Optimization': {
+    icon: TrendingUp,
+    description: [
+      "High-Volume Keyword Identification: Find low-competition, high-search-volume keywords using proprietary tools .",
+      "AI-Powered Writing Assistance: Use AI tools for Amazon-optimized titles, bullet points, and descriptions.",
+      "Search Volume Trends: Analyze keyword performance over time.",
+      "Keyword Filtering: Refine results by search volume, competition, and relevance.",
+      "Live Keyword Tracking: Monitor keyword rankings with real-time updates.",
+      "Keyword Processing: Cleanse, sort, and refine keyword lists for better targeting."
+    ]
+  },
+  'Profit Calculator': {
+    icon: Target,
+    description: [
+      "ROI Calculation: Calculate profitability and ROI before investing.",
+      "Real-Time Profit Tracking: Monitor gross profit, net profit, and margins dynamically.",
+      "Cost Assessment: Evaluate costs such as Amazon fees, ad spend, and COGS.",
+      "Marginal Analysis: Instant margin calculations displayed for every ASIN.",
+      "Fee Forecast Engine: Predict potential fee changes to adjust strategies."
+    ]
+  },
+  'Listing Optimization': {
+    icon: Edit,
+    description: [
+      "AI-Enhanced Copywriting: Generate optimized titles, bullet points, and descriptions automatically.",
+      "Listing Analysis: Compare up to 10 listings simultaneously for improvements.",
+      "Backend Search Term Editing: Edit backend search terms for better indexing.",
+      "Historical Content Access: Review past AI-generated content for revisions.",
+      "Listing Strength Evaluation: Use tools to evaluate listing optimization scores.",
+      "Image Comparison: Visualize before-and-after optimization results."
+    ]
+  },
+  'Operations Management': {
+    icon: Settings,
+    description: [
+      "Inventory Management: Forecast demand and automate reorder alerts.",
+      "Alerts: Set up custom alerts for stockouts, price changes, and BSR fluctuations.",
+      "Mobile Responsiveness: Ensure tools are accessible and functional across devices.",
+      "Dark/Light Mode Switch: Offer user-customizable interface themes."
+    ]
+  },
+  'Analytics & Reporting': {
+    icon: BarChart2,
+    description: [
+      "Centralized Data Visualization: Use dashboards for actionable insights on rankings, sales velocity, and conversion rates.",
+      "Customizable Metrics: Track the metrics most relevant to your business.",
+      "Visual Data Representation: Utilize charts, graphs, and heatmaps for data interpretation.",
+      "PDF Report Generation: Generate professional reports with tools like Node.js + Puppeteer.",
+      "Real-Time Updates: Source data directly from Amazon and update in real-time."
+    ]
+  },
+  'Additional Tools & Features': {
+    icon: GraduationCap,
+    description: [
+      "Keyword Tracker: Track keyword rankings over time.",
+      "Market Tracker: Monitor market trends and competitor activities.",
+      "SEO Optimization: Optimize listings with meta tags, alt text, and keyword-rich content.",
+      "Customer Support: Access real-time support via chat widgets.",
+      "Style Keywords: Add style keywords to the backend of listings for better targeting."
+    ]
+  },
+  'Brand Management': {
+    icon: Shield,
+    description: [
+      "Brand Protection: Implement defensive protocols for safeguarding intellectual property.",
+      "Auto-Takedown Protocols: Automatically remove infringements across global marketplaces.",
+      "Hijacker Radar: Detect real-time seller changes with neural pattern matching.",
+      "IP Sentinel: Monitor trademark/copyright registrations."
+    ]
+  },
+  'Training & Education': {
+    icon: GraduationCap,
+    description: [
+      "Freedom Ticket Course: Comprehensive Amazon training for sellers.",
+      "Amazon PPC Academy: Advanced training for pay-per-click advertising.",
+      "Webinars: Access live and recorded webinars on e-commerce strategies.",
+      "Project X/W: Case studies and guides for selling on Amazon and Walmart."
+    ]
+  }
+};
+
+
+// Stats data
+const stats = [
+  { stat: '500K+', description: 'Active Sellers' },
+  { stat: '$2.1B+', description: 'Revenue Generated' },
+  { stat: '98%', description: 'Customer Satisfaction' },
+  { stat: '24/7', description: 'Expert Support' }
+];
+
+// Testimonials
+const testimonials = [
+  {
+    quote: "Helium 10 transformed my Amazon business. I've seen a 300% increase in sales since using their tools.",
+    author: "Sarah Johnson",
+    role: "6-Figure Amazon Seller"
+  },
+  {
+    quote: "The keyword research tools are incredible. My products now rank higher than ever before.",
+    author: "Michael Chen",
+    role: "E-commerce Entrepreneur"
+  }
+];
+
+// Add new data structures for enhanced sections
+
+const detailedFeatures = [
+  {
+    title: "Deep Dive Market Expansion & Niche Diversification",
+    description:
+      "Explore beyond surface-level niches to uncover a constellation of opportunities using AI-driven tools and advanced competitor analysis.",
+    image: "/public/1_.png",
+    features: [
+      {
+        title: "Advanced Product Research Suite",
+        description:
+          "Utilize tools like the Black Box to identify profitable niches and adjacent categories with untapped potential. " +
+          "Leverage granular filters to analyze low-competition opportunities that standard research might miss. " 
+          
+      },
+      {
+        title: "AI Forecasting for Emerging Trends",
+        description:
+          "Anticipate future consumer preferences by leveraging demand forecasting tools. " +
+          "Analyze historical data to predict shifts in the market and identify niches poised for growth.",
+      },
+      {
+        title: "International Marketplace Expansion",
+        description:
+          "Research global demand for your products using Black Box filters for different Amazon marketplaces. " +
+          "Adapt your listings and strategies to cater to cultural nuances in new regions.",
+      },
+    ],
+  },
+  {
+    title: "Elite Listing Optimization & Conversion Rate Maximization",
+    description:
+      "Transform your listings into high-converting assets with data-driven strategies and continuous refinement.",
+    image: "/public/2_.png",
+    features: [
+      {
+        title: "Cerebro for Granular Keyword Research",
+        description:
+          "Uncover long-tail keywords and semantic variations that drive qualified traffic. " +
+          "Analyze competitor keyword strategies to identify optimization gaps. " 
+      },
+      {
+        title: "Smart Keyword Integration",
+        description:
+          "Achieve optimal keyword density and placement without stuffing. " +
+          "Use AI-driven tools to weave keywords naturally into compelling product storytelling.",
+      },
+      {
+        title: "Real-Time Rank Tracking and A/B Testing",
+        description:
+          "Track keyword performance in real-time and A/B test listing elements like titles, bullet points, images, and descriptions. " +
+          "Refine based on conversion rates and sales data.",
+      },
+    ],
+  },
+  {
+    title: "Data-Driven Performance Tracking & Profitability Analysis",
+    description:
+      "Track, analyze, and optimize your business performance at every stage of growth with advanced metrics and automation.",
+    image: "/public/3_.png",
+    features: [
+      {
+        title: "Real-Time Analytics Dashboards",
+        description:
+          "Monitor ranking, sales velocity, conversion rates, and advertising ROI with custom alerts for critical metric changes.",
+      },
+      {
+        title: "Detailed Profitability Analysis",
+        description:
+          "Factor in Amazon fees, ad spend, and COGS to identify your most profitable products. " +
+          "Optimize resource allocation to maximize net profit.",
+      },
+      {
+        title: "Automated Performance Reporting",
+        description:
+          "Generate daily, weekly, or monthly reports to share with your team and ensure alignment on key performance indicators (KPIs).",
+      },
+    ],
+  },
+  {
+    title: "Strategic PPC Campaign Scaling & Automation",
+    description:
+      "Leverage automation and AI to scale your advertising efforts efficiently while maintaining maximum ROI.",
+    image: "/public/4_.png",
+    features: [
+      {
+        title: "Advanced PPC Automation",
+        description:
+          "Automate bid adjustments, keyword expansion, and negative keyword identification based on real-time performance data.",
+      },
+      {
+        title: "AI-Driven Ad Optimization",
+        description:
+          "Refine targeting, ad creatives, and bidding strategies using AI algorithms that learn from campaign data continuously.",
+      },
+      {
+        title: "Programmatic Advertising Integration",
+        description:
+          "Expand reach and retarget customers effectively by integrating programmatic strategies with broader marketing efforts.",
+      },
+    ],
+  },
+  {
+    title: "Operational Efficiency & Automation for Hypergrowth",
+    description:
+      "Streamline backend operations to handle increased volume efficiently and profitably as your e-commerce empire scales.",
+    image: "/public/5_.png",
+    features: [
+      {
+        title: "Automated Inventory Management",
+        description:
+          "Forecast demand accurately and trigger automated reorder alerts across multiple marketplaces to prevent stockouts. " +
+          "Optimize inventory turnover for better cash flow.",
+      },
+      {
+        title: "Automated Customer Service",
+        description:
+          "Use chatbots for basic inquiries, automate order confirmations and shipping updates, and streamline feedback resolution.",
+      },
+      {
+        title: "Task Delegation and Team Scaling",
+        description:
+          "Leverage project management tools to define roles, delegate tasks, and maintain smooth workflows as your team expands.",
+      },
+    ],
+  },
+  {
+    title: "Building a Robust E-commerce Brand & Customer Loyalty",
+    description:
+      "Create a strong brand identity that fosters customer loyalty and drives repeat purchases beyond Amazon.",
+    image: "/public/6_.png",
+    features: [
+      {
+        title: "Strong Brand Identity & Story",
+        description:
+          "Craft a compelling brand story and communicate your values through listings, marketing materials, and customer interactions.",
+      },
+      {
+        title: "Enhanced Customer Experience",
+        description:
+          "Leverage personalized email campaigns, respond to reviews, and create exclusive content to deepen customer engagement. " 
+      },
+      {
+        title: "Standalone E-commerce Store Expansion",
+        description:
+          "Launch a branded Shopify store to diversify your sales channels and reduce dependency on Amazon. " +
+          "Drive traffic through a holistic marketing strategy that includes SEO, social media, and email marketing.",
+      },
+    ],
+  },
+];
+
+
+const processSteps = [
+  {
+    title: "Research Your Market",
+    description: "Use our Black Box tool to find profitable niches and products with high demand and low competition. Leverage AI-driven competitor analysis to uncover untapped opportunities."
+  },
+  {
+    title: "Optimize Your Listings",
+    description: "Leverage our keyword research tools to create high-ranking product listings that convert. Utilize granular keyword research with Cerebro to identify optimization gaps."
+  },
+  {
+    title: "Track Performance",
+    description: "Monitor your rankings, sales, and profitability with real-time analytics and alerts. Employ real-time analytics dashboards to keep an eye on critical metric changes."
+  },
+  {
+    title: "Scale Your Advertising",
+    description: "Utilize advanced PPC automation to manage bids, keywords, and ad creatives efficiently. Integrate programmatic advertising to expand reach and retarget customers effectively."
+  },
+  {
+    title: "Enhance Operational Efficiency",
+    description: "Automate inventory management and customer service processes to handle increased volume. Use task delegation tools to maintain smooth workflows as your team grows."
+  },
+  {
+    title: "Build Your Brand",
+    description: "Create a strong brand identity that fosters customer loyalty beyond Amazon. Launch a standalone e-commerce store and drive traffic through SEO, social media, and email marketing."
+  }
+];
+
+
+const benefits = [
+  {
+    icon: Zap,
+    title: "10x Faster Research",
+    description: "Cut your product research time from days to hours with AI-powered insights.",
+    metrics: [
+      { value: "90%", label: "Time Saved" },
+      { value: "2hrs", label: "Avg. Research Time" }
+    ]
+  },
+  {
+    icon: TrendingUp,
+    title: "Higher Rankings",
+    description: "Achieve better search rankings with optimized listings and strategic keyword placement.",
+    metrics: [
+      { value: "+127%", label: "Avg. Rank Improvement" },
+      { value: "Top 3", label: "Typical Position" }
+    ]
+  },
+  {
+    icon: DollarSign,
+    title: "Increased Profits",
+    description: "Maximize your margins with competitive pricing and inventory management.",
+    metrics: [
+      { value: "+65%", label: "Profit Increase" },
+      { value: "$2.1B+", label: "User Revenue" }
+    ]
+  },
+  {
+    icon: LineChart,
+    title: "Market Intelligence",
+    description: "Stay ahead of trends with real-time market data and competitor insights.",
+    metrics: [
+      { value: "24/7", label: "Market Monitoring" },
+      { value: "500K+", label: "Products Tracked" }
+    ]
+  },
+  {
+    icon: Brain,
+    title: "AI-Powered Insights",
+    description: "Make data-driven decisions with machine learning algorithms and predictive analytics.",
+    metrics: [
+      { value: "99%", label: "Accuracy Rate" },
+      { value: "1M+", label: "Daily Predictions" }
+    ]
+  },
+  {
+    icon: Shield,
+    title: "Risk Management",
+    description: "Protect your business with inventory alerts and market trend warnings.",
+    metrics: [
+      { value: "-80%", label: "Risk Reduction" },
+      { value: "100%", label: "Stock Protection" }
+    ]
+  }
+];
+
+const successStories = [
+  {
+    day: "Day 1",
+    milestone: "Market Research",
+    metric: "127",
+    metricLabel: "Potential Products Found",
+    description: "Using Black Box, discovered high-potential niches in the pet accessories market with low competition and high demand.",
+    tools: ["Black Box", "Market Tracker"],
+    icon: Search
+  },
+  {
+    day: "Week 1",
+    milestone: "Product Selection",
+    metric: "$42K",
+    metricLabel: "Monthly Revenue Potential",
+    description: "Identified the perfect product using Helium 10's profitability calculator and competitor analysis tools.",
+    tools: ["Cerebro", "Profitability Calculator"],
+    icon: Target
+  },
+  {
+    day: "Month 1",
+    milestone: "Launch Success",
+    metric: "Page 1",
+    metricLabel: "Amazon Rankings",
+    description: "Optimized listings with high-converting keywords and achieved first-page rankings for main search terms.",
+    tools: ["Cerebro", "Magnet", "Scribbles"],
+    icon: Rocket
+  },
+  {
+    day: "Month 3",
+    milestone: "Business Scaling",
+    metric: "$127K",
+    metricLabel: "Monthly Revenue",
+    description: "Expanded to multiple variations and launched in international marketplaces using Market Tracker insights.",
+    tools: ["Market Tracker", "Inventory Protector"],
+    icon: BarChart2
+  },
+  {
+    day: "Month 6",
+    milestone: "Brand Growth",
+    metric: "4.8",
+    metricLabel: "Star Rating",
+    description: "Maintained excellent product quality and customer satisfaction while scaling to 7 figures annually.",
+    tools: ["Review Insights", "Brand Analytics"],
+    icon: Star
+  }
+];
+
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Helium 10 - Power Your E-commerce Success">
+  <Header />
+  
+  <!-- Hero Section with OrbEffect -->
+  <OrbEffect className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-5xl mx-auto">
+      <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text mb-8">
+        Dominate E-commerce with
+        <span class="block mt-2">Data-Driven Precision</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
+        Join over 500,000 sellers using Helium 10's suite of tools to find winning products,
+        optimize listings, and scale their e-commerce empire.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <ShinyButton
+          text="Start Your Journey"
+          className="w-full sm:w-auto text-lg"
+        />
+        <a href="#features" class="group flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+          <span>See How It Works</span>
+          <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+    </div>
+  </OrbEffect>
+
+  <!-- Stats Section with ParticleBackground -->
+  <ParticleBackground className="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {stats.map(({ stat, description }) => (
+          <StatCard stat={stat} description={description} />
+        ))}
+      </div>
+    </div>
+  </ParticleBackground>
+
+<!-- CTA Section 1-->
+  <div class="responsive-container relative py-20">
+    <div class="text-center">
+      <p class="text-blue-1200 dark:text-blue-8400 mb-12 max-w-3xl mx-auto text-xl leading-relaxed">
+        Why wait to dominate Amazon when you can start now? Access the ultimate toolkit for sellers who mean business.
+      </p>
+      <a
+        href={AFFILIATE_URL}
+        class="inline-block px-10 py-5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-xl font-semibold"
+      >
+        Dominate Amazon Now
+      </a>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-16">
+        Everything You Need to
+        <span class="text-blue-600">Scale Your Business</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {Object.entries(features).map(([title, { icon: Icon, description }]) => (
+          <div class="group relative p-8 rounded-2xl bg-gradient-to-b from-gray-50 to-white shadow-lg hover:shadow-xl transition-all">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div class="relative">
+              <Icon class="w-12 h-12 text-blue-600 mb-4" />
+              <h3 class="text-2xl font-semibold mb-4">{title}</h3>
+              <p class="text-gray-600">{description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+   <!-- CTA Section 2 -->
+   <div class="responsive-container relative py-20">
+    <div class="text-center">
+      <p class="text-blue-1200 dark:text-blue-8400 mb-12 max-w-3xl mx-auto text-xl leading-relaxed">
+        Don’t just dream of success on Amazon—achieve it! Elevate your business with Helium 10’s proven tools and resources.
+      </p>
+      <a
+        href={AFFILIATE_URL}
+        class="inline-block px-10 py-5 bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-xl font-semibold"
+      >
+        Achieve Your Amazon Goals Today
+      </a>
+    </div>
+  </div>
+
+  <!-- Detailed Feature Showcases -->
+    <!-- Detailed Feature Showcases -->
+    {detailedFeatures.map((feature, index) => (
+      <FeatureShowcase
+        title={feature.title}
+        description={feature.description}
+        features={feature.features}
+        image={feature.image}
+        reversed={index % 2 !== 0}
+      />
+    ))}
+
+     <!-- CTA Section 3 -->
+     <div class="responsive-container relative py-20">
+      <div class="text-center">
+        <p class="text-blue-1200 dark:text-blue-8400 mb-12 max-w-3xl mx-auto text-xl leading-relaxed">
+          Transform your Amazon business from ordinary to extraordinary. Unleash the power of Helium 10 today!
+        </p>
+        <a
+          href={AFFILIATE_URL}
+          class="inline-block px-10 py-5 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-xl font-semibold"
+        >
+          Transform Your Business Today
+        </a>
+      </div>
+    </div>
+
+  <!-- How It Works Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold">
+          How to Scale Your
+          <span class="text-blue-600">E-commerce Empire</span>
+        </h2>
+        <p class="mt-4 text-xl text-gray-600">
+          Follow our proven process to build and scale your online business
+        </p>
+      </div>
+      <ProcessSteps steps={processSteps} />
+    </div>
+  </section>
+  <!-- CTA Section 6 -->
+  <div class="responsive-container relative py-20">
+    <div class="text-center">
+      <p class="text-blue-1200 dark:text-blue-8400 mb-12 max-w-3xl mx-auto text-xl leading-relaxed">
+        Tired of incremental improvements? Unleash your Amazon selling potential and witness explosive growth with Helium 10. Data-driven tools and expert training await. 
+      </p>
+      <a
+        href={AFFILIATE_URL}
+        class="inline-block px-10 py-5 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-xl font-semibold"
+      >
+        Ignite Your Sales
+      </a>
+    </div>
+  </div>
+
+  <!-- Benefits Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold">
+          Transform Your Business with
+          <span class="text-blue-600">Data-Driven Tools</span>
+        </h2>
+        <p class="mt-4 text-xl text-gray-600">
+          See how our suite of tools can revolutionize your e-commerce strategy
+        </p>
+      </div>
+      <BenefitGrid items={benefits} />
+    </div>
+  </section>
+
+  <!-- CTA Section 4 -->
+  <div class="responsive-container relative py-20">
+    <div class="text-center">
+      <p class="text-blue-1200 dark:text-blue-8400 mb-12 max-w-3xl mx-auto text-xl leading-relaxed">
+        Want to become the next Amazon success story? Dive into a suite of tools that empowers you to reach new heights.
+      </p>
+      <a
+        href={AFFILIATE_URL}
+        class="inline-block px-10 py-5 bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-xl font-semibold"
+      >
+        Start Your Journey to Success
+      </a>
+    </div>
+  </div>
+  
+ 
+
+<!-- Featured Video Section -->
+<section class="video-section min-h-screen flex flex-col justify-center bg-white light:bg-blue-900 relative overflow-hidden">
+  <!-- Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-blue-50/50 dark:from-blue-800/50"></div>
+
+  <!-- Header Content -->
+  <div class="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h2 class="responsive-text-4xl md:text-6xl font-bold dark:text-gray-100 mb-8">
+      See Helium 10 in
+      <span class="text-blue-600 dark:text-blue-400">Action</span>
+    </h2>
+    <p class="responsive-text-xl md:text-2xl text-blue-1200 dark:text-blue-1300 leading-relaxed">
+      Watch how successful sellers are using Helium 10 to build their e-commerce empires
+    </p>
+  </div>
+
+  <!-- Video Container -->
+  <div class="relative z-10 flex justify-center items-center w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+    <div class="w-full video-wrapper bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-2xl dark:shadow-blue-500/20">
+      <div class="relative w-full" style="padding-top: 56.25%;">
+        <iframe
+          class="absolute inset-0 w-full h-full"
+          src="https://www.youtube.com/embed/ELJSdDAU_oE"
+          title="Helium 10 Success Story"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- CTA Section 5 -->
+    <div class="responsive-container relative py-20">
+      <div class="text-center">
+        <p class="text-blue-1200 dark:text-blue-8400 mb-12 max-w-3xl mx-auto text-xl leading-relaxed">
+          Ready to transform your Amazon business? Join thousands of successful sellers who have already discovered the power of Helium 10.
+        </p>
+        <a
+          href={AFFILIATE_URL}
+          class="inline-block px-10 py-5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-xl font-semibold"
+        >
+          Start Your Success Story Today
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Timeline Section -->
+  <section class="responsive-spacing-y bg-blue-50 light:bg-blue-800 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-white/50 dark:from-blue-900/50"></div>
+    <div class="responsive-container relative">
+      <div class="text-center mb-16">
+        <h2 class="responsive-text-4xl font-bold dark:text-gray-100">
+          Your Journey to
+          <span class="text-blue-600 dark:text-blue-400">E-commerce Success</span>
+        </h2>
+        <p class="responsive-text-xl mt-4 text-gray-600 dark:text-gray-300">
+          Follow the proven path of successful sellers who built their empires with Helium 10
+        </p>
+      </div>
+      
+      <SuccessTimeline stories={successStories} />
+      
+      <div class="mt-16 text-center">
+        <ShinyButton href={AFFILIATE_URL} className="responsive-text-lg px-8 py-4 dark:bg-gray-800 dark:text-white">
+          Start Your Success Story
+          <ArrowRight className="w-5 h-5 ml-2" />
+        </ShinyButton>
+      </div>
+    </div>
+  </section>
+
+  
+<!-- Quick Win Cards Section -->
+<section class="py-16 bg-white dark:bg-blue-900">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100">
+        Quick Wins with
+        <span class="text-blue-600 dark:text-blue-400">Helium 10</span>
+      </h2>
+      <p class="text-xl sm:text-2xl mt-4 text-gray-600 dark:text-gray-300">
+        Real results our users achieved in their first week
+      </p>
+    </div>
+
+    <!-- Quick Win Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {[
+        {
+          title: "Keyword Gold Mine",
+          description: "Found 347 high-volume, low-competition keywords in just 2 hours using Cerebro",
+          metric: "347",
+          metricLabel: "Keywords Found",
+          icon: Lightbulb,
+          cta: {
+            text: "Start Your Keyword Search",
+            url: {AFFILIATE_URL},
+          },
+        },
+        {
+          title: "Instant Rankings",
+          description: "Achieved page 1 rankings for 5 main keywords within 72 hours of optimization",
+          metric: "72h",
+          metricLabel: "To Page 1",
+          icon: TrendingUp,
+          cta: {
+            text: "Optimize Your Listings",
+            url: {AFFILIATE_URL},
+          },
+        },
+        {
+          title: "Profit Maximizer",
+          description: "Increased profit margins by 23% by optimizing pricing with Market Tracker",
+          metric: "+23%",
+          metricLabel: "Profit Increase",
+          icon: DollarSign,
+          cta: {
+            text: "Boost Your Profits",
+            url: {AFFILIATE_URL},
+          },
+        },
+      ].map((win, index) => {
+        const WinIcon = win.icon;
+        return (
+          <div class="bg-gray-200 dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-blue-500/10 p-8 relative group hover:shadow-2xl transition-shadow duration-300 overflow-hidden">
+            <!-- Hover Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            <!-- Card Content -->
+            <div class="relative z-10">
+              <!-- Icon -->
+              <div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-6">
+                <WinIcon class="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+              </div>
+
+              <!-- Title and Description -->
+              <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">{win.title}</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">{win.description}</p>
+
+              <!-- Metric -->
+              <div class="flex items-baseline gap-2 mb-6">
+                <span class="text-3xl font-bold text-blue-600 dark:text-blue-400">{win.metric}</span>
+                <span class="text-gray-500 dark:text-gray-400">{win.metricLabel}</span>
+              </div>
+
+              <!-- Call-to-Action Button -->
+              <a
+                href={AFFILIATE_URL}
+                class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                aria-label={`Go to ${win.cta.text}`}
+              >
+                {win.cta.text}
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- Success Stories Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold">
+          Real Results from
+          <span class="text-blue-600">Real Sellers</span>
+        </h2>
+        <p class="mt-4 text-xl text-gray-600">
+          Join thousands of successful sellers who have transformed their business with Helium 10
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            metric: "$1.2M",
+            label: "Monthly Revenue",
+            quote: "Helium 10's tools helped me identify the perfect product niche and optimize my listings for maximum visibility.",
+            author: "David Chen",
+            role: "Top 1% Amazon Seller"
+          },
+          {
+            metric: "483%",
+            label: "YoY Growth",
+            quote: "The keyword research tools are incredible. My products now consistently rank on the first page.",
+            author: "Sarah Thompson",
+            role: "E-commerce Entrepreneur"
+          },
+          {
+            metric: "12",
+            label: "Best Sellers",
+            quote: "From product research to optimization, Helium 10 has been crucial in scaling my business across multiple categories.",
+            author: "Michael Rodriguez",
+            role: "Multi-Category Seller"
+          }
+        ].map(story => (
+          <div class="bg-white rounded-2xl shadow-lg p-8 relative group hover:shadow-xl transition-shadow">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="relative">
+              <div class="mb-6">
+                <p class="text-4xl font-bold text-blue-600">{story.metric}</p>
+                <p class="text-gray-600">{story.label}</p>
+              </div>
+              <blockquote class="text-gray-600 mb-6">"{story.quote}"</blockquote>
+              <div>
+                <cite class="font-semibold text-gray-900 not-italic">{story.author}</cite>
+                <p class="text-sm text-gray-500">{story.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Partners Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold">
+          Seamlessly Integrates with Your
+          <span class="text-blue-600">Favorite Platforms</span>
+        </h2>
+        <p class="mt-4 text-xl text-gray-600">
+          Connect Helium 10 with the tools you already use
+        </p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {[
+          "Amazon",
+          "Walmart",
+          "Shopify",
+          "WooCommerce"
+        ].map(platform => (
+          <div class="bg-white rounded-xl p-6 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+            <span class="text-xl font-semibold text-gray-900">{platform}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section with AnimatedBackground -->
+  <AnimatedBackground className="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-bold text-center text-white mb-16">
+        Trusted by Industry Leaders
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {testimonials.map(({ quote, author, role }) => (
+          <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg">
+            <Star class="w-8 h-8 text-yellow-400 mb-6" />
+            <blockquote class="text-white text-lg mb-6">{quote}</blockquote>
+            <div>
+              <cite class="text-white font-semibold not-italic">{author}</cite>
+              <p class="text-blue-200 text-sm">{role}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </AnimatedBackground>
+
+  <!-- CTA Section 7 -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-8">
+        Ready to Transform Your
+        <span class="text-blue-600">E-commerce Business?</span>
+      </h2>
+      <p class="text-xl text-gray-600 mb-12">
+        Join thousands of successful sellers who have already taken their business to the next level with Helium 10.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <a
+    href={AFFILIATE_URL}
+    class="inline-block text-center w-full sm:w-auto"
+          >
+    <ShinyButton
+      text="Get Started Now"
+      className="w-full sm:w-auto text-lg"
+    />
+      </a>
+        <a href={AFFILIATE_URL} class="text-gray-600 hover:text-blue-600 transition-colors">
+          View Pricing Plans →
+        </a>
+      </div>
+      <div class="mt-12 flex items-center justify-center gap-4 text-sm text-gray-500">
+        <span class="flex items-center gap-2">
+          <CheckCircle class="w-5 h-5 text-green-500" />
+          14-Day Free Trial
+        </span>
+        <span class="flex items-center gap-2">
+          <CheckCircle class="w-5 h-5 text-green-500" />
+          No Credit Card Required
+        </span>
+      </div>
+    </div>
+  </section>
+
+ 
 </Layout>

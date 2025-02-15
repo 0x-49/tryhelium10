@@ -1,0 +1,40 @@
+---
+interface Step {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps }: Props = Astro.props;
+---
+
+<div class="relative">
+  <div class="absolute inset-0 h-1/2 bg-gradient-to-b from-gray-50"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+      {steps.map((step: Step, index: number) => (
+        <div class="group relative pb-10 last:pb-0">
+          {index !== steps.length - 1 && (
+            <div class="absolute left-8 top-14 h-full w-0.5 bg-gray-200 group-hover:bg-blue-500 transition-colors"></div>
+          )}
+          <div class="relative flex items-start group">
+            <span class="h-16 w-16 rounded-full border-2 border-blue-500 bg-white flex items-center justify-center text-2xl font-bold text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+              {index + 1}
+            </span>
+            <div class="ml-6 pt-3">
+              <h3 class="font-bold text-xl text-gray-900 group-hover:text-blue-600 transition-colors">
+                {step.title}
+              </h3>
+              <p class="mt-2 text-gray-600">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

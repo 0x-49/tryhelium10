@@ -1,0 +1,37 @@
+---
+const { className } = Astro.props;
+---
+
+<div class:list={["relative overflow-hidden", className]}>
+  <div class="absolute inset-0">
+    <div class="absolute h-[200%] w-full">
+      {Array.from({ length: 20 }).map((_, i) => (
+        <div
+          class="absolute bg-gradient-to-b from-blue-500/20 to-purple-500/20 [mask-image:linear-gradient(to_bottom,white,transparent)]"
+          style={`
+            height: 40%;
+            width: 2px;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            animation: fall ${5 + Math.random() * 5}s linear infinite;
+            animation-delay: -${Math.random() * 5}s;
+          `}
+        />
+      ))}
+    </div>
+  </div>
+  <div class="relative">
+    <slot />
+  </div>
+</div>
+
+<style>
+  @keyframes fall {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+</style>

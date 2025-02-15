@@ -1,0 +1,158 @@
+/* Base styles */
+/* Import Tailwind CSS base styles */
+/*! @import 'tailwindcss/base'; */
+@tailwind base;
+/* Import Tailwind CSS component styles */
+/*! @import 'tailwindcss/components'; */
+@tailwind components;
+/* Import Tailwind CSS utility styles */
+/*! @import 'tailwindcss/utilities'; */
+@tailwind utilities;
+
+:root {
+  --primary-gradient: linear-gradient(to right, #3b82f6, #8b5cf6);
+  --primary-gradient-hover: linear-gradient(to right, #2563eb, #7c3aed);
+}
+
+.dark {
+  --primary-gradient: linear-gradient(to right, #60a5fa, #a78bfa);
+  --primary-gradient-hover: linear-gradient(to right, #3b82f6, #8b5cf6);
+}
+
+/* Theme transitions */
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Video container styles */
+.video-section {
+  width: 100vw;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.video-wrapper {
+  width: 100%;
+  max-width: 2000px; /* Increased maximum width */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.aspect-video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.aspect-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+}
+
+/* Responsive container utilities */
+.responsive-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Dark mode specific styles */
+.dark .gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dark .gradient-border {
+  border-image: var(--primary-gradient) 1;
+}
+
+.dark .gradient-bg {
+  background: var(--primary-gradient);
+}
+
+.dark .card-bg {
+  background: rgba(17, 24, 39, 0.8);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive text utilities */
+.responsive-text-base {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+}
+
+.responsive-text-lg {
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+}
+
+.responsive-text-xl {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+}
+
+.responsive-text-2xl {
+  font-size: clamp(1.5rem, 3.5vw, 1.875rem);
+}
+
+.responsive-text-3xl {
+  font-size: clamp(1.875rem, 4vw, 2.25rem);
+}
+
+.responsive-text-4xl {
+  font-size: clamp(2.25rem, 5vw, 3rem);
+}
+
+/* Responsive spacing utilities */
+.responsive-spacing-y {
+  padding-top: clamp(2rem, 5vw, 5rem);
+  padding-bottom: clamp(2rem, 5vw, 5rem);
+}
+
+.responsive-spacing-x {
+  padding-left: clamp(1rem, 3vw, 2rem);
+  padding-right: clamp(1rem, 3vw, 2rem);
+}
+
+/* Mobile-first grid layouts */
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}

@@ -1,0 +1,97 @@
+---
+import { Facebook, Linkedin, Twitter, Instagram, Youtube, Phone, Mail, MapPin } from 'lucide-astro';
+import { SOCIAL_LINKS, CONTACT_INFO } from '../config/constants';
+
+const socialIcons = {
+  facebook: Facebook,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  instagram: Instagram,
+  youtube: Youtube
+};
+---
+
+<footer class="bg-gray-50 dark:bg-gray-800 py-12">
+  <div class="responsive-container">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Contact Info -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Contact Us</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href={`tel:${CONTACT_INFO.phone}`} class="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+              <Phone class="w-5 h-5 mr-2" />
+              {CONTACT_INFO.phone}
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${CONTACT_INFO.email}`} class="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+              <Mail class="w-5 h-5 mr-2" />
+              {CONTACT_INFO.email}
+            </a>
+          </li>
+          <li>
+            <div class="flex items-start text-gray-600 dark:text-gray-300">
+              <MapPin class="w-5 h-5 mr-2 mt-1 flex-shrink-0" />
+              <span>{CONTACT_INFO.address}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Links -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Connect With Us</h3>
+        <div class="grid grid-cols-3 gap-4">
+          {Object.entries(SOCIAL_LINKS).map(([platform, url]) => {
+            const Icon = socialIcons[platform as keyof typeof socialIcons];
+            return (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-center w-12 h-12 rounded-lg bg-white dark:bg-gray-700 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              >
+                <Icon class="w-6 h-6" />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Quick Links</h3>
+        <ul class="space-y-2">
+          <li>
+            <a href="#features" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Features</a>
+          </li>
+          <li>
+            <a href="#success-stories" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Success Stories</a>
+          </li>
+          <li>
+            <a href="#pricing" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Pricing</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Stay Updated</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Get the latest updates and tips for Amazon selling.</p>
+      
+      </div>
+    </div>
+
+    <!-- Affiliate Disclaimer -->
+    <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+      <div class="text-sm text-gray-500 dark:text-gray-400 space-y-4">
+        <p class="max-w-4xl mx-auto text-center">
+          <strong>Affiliate Disclaimer:</strong> As an affiliate partner of Helium 10, we may earn a commission from qualifying purchases. 
+          This does not affect your pricing or user experience. We are committed to providing honest, unbiased information about Helium 10's tools and services.
+        </p>
+        <p class="text-center">&copy; {new Date().getFullYear()} Helium 10. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>

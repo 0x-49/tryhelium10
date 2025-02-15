@@ -1,0 +1,21 @@
+---
+const { className } = Astro.props;
+---
+
+<div class:list={["relative overflow-hidden", className]}>
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-75"></div>
+    <div class="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+  </div>
+  <div class="relative z-10">
+    <slot />
+  </div>
+</div>
+
+<style>
+  @keyframes pulse {
+    50% {
+      opacity: .5;
+    }
+  }
+</style>

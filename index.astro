@@ -1,0 +1,424 @@
+---
+import Layout from './src/layouts/Layout.astro';
+import Header from './src/components/Header.astro';
+import { 
+  BarChart3,
+  Search,
+  Tag,
+  Settings,
+  PieChart,
+  MousePointerClick,
+  BookOpen,
+  Users,
+  TrendingUp,
+  Clock,
+  DollarSign,
+  Target,
+  Award,
+  ArrowRight,
+  Facebook,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Youtube,
+  Mail,
+  Phone,
+  MapPin
+} from 'lucide-astro';
+
+const AFFILIATE_URL = "https://crushtrk.com/?a=15743&c=188&p=r&s4=JOINUS10&s5=PURL-041340";
+
+const pricingFeatures = [
+  {
+    icon: Search,
+    title: "Product Research",
+    description: "Identify profitable opportunities with Black Box, Xray, and Product Launchpad.",
+  },
+  {
+    icon: Tag,
+    title: "Keyword Research",
+    description: "Discover high-volume, low-competition keywords with Cerebro and Magnet.",
+  },
+  {
+    icon: Settings,
+    title: "Listing Optimization",
+    description: "Create high-converting listings with Scribbles and Listing Analyzer.",
+  },
+  {
+    icon: PieChart,
+    title: "Operations Tools",
+    description: "Streamline your business with Inventory Management and Refund Genie.",
+  },
+  {
+    icon: MousePointerClick,
+    title: "Advertising Tools",
+    description: "Optimize your ad campaigns and improve ROI with Adtomic.",
+  },
+  {
+    icon: BookOpen,
+    title: "Training & Resources",
+    description: "Learn from experts with Freedom Ticket and Amazon PPC Academy.",
+  },
+];
+
+const benefits = [
+  {
+    icon: Clock,
+    title: "Save Time",
+    description: "Automate tedious tasks and focus on growth",
+  },
+  {
+    icon: DollarSign,
+    title: "Increase Revenue",
+    description: "Optimize listings and advertising for better sales",
+  },
+  {
+    icon: Target,
+    title: "Data-Driven Decisions",
+    description: "Make choices based on accurate insights",
+  },
+  {
+    icon: Award,
+    title: "Competitive Edge",
+    description: "Stay ahead with market intelligence",
+  },
+];
+
+const userTypes = [
+  {
+    icon: Users,
+    title: "New Sellers",
+    description: "Perfect for those just starting their e-commerce journey",
+  },
+  {
+    icon: TrendingUp,
+    title: "Established Sellers",
+    description: "Scale your existing business to new heights",
+  },
+  {
+    icon: Award,
+    title: "Brands",
+    description: "Optimize your presence on Amazon and Walmart",
+  },
+  {
+    icon: Users,
+    title: "Agencies",
+    description: "Manage multiple client accounts efficiently",
+  },
+];
+
+const pricingFeaturesObject = {
+  'Product Research': {
+    'Black Box': {
+      starter: 'Limited',
+      platinum: '✓',
+      diamond: '✓'
+    },
+    'Xray': {
+      starter: '✓',
+      platinum: '✓',
+      diamond: '✓'
+    },
+    'Xray for Walmart': {
+      starter: 'Limited',
+      platinum: '✓',
+      diamond: '✓'
+    }
+  },
+  'Keyword Research': {
+    'Cerebro': {
+      starter: 'Limited',
+      platinum: '✓',
+      diamond: '✓'
+    },
+    'Magnet': {
+      starter: 'Limited',
+      platinum: '✓',
+      diamond: '✓'
+    },
+    'Xray Keywords': {
+      starter: '5 uses',
+      platinum: '✓',
+      diamond: '✓'
+    }
+  },
+  'Analytics': {
+    'My Products': {
+      starter: '20',
+      platinum: '1,000',
+      diamond: '1,000'
+    },
+    'Keyword Tracker': {
+      starter: '500 keywords',
+      platinum: '2,500 keywords',
+      diamond: '2,500 keywords'
+    },
+    'Market Tracker': {
+      starter: 'Up to 1 Market',
+      platinum: 'Up to 3 Markets',
+      diamond: 'Up to 5 Markets'
+    }
+  },
+  'Operations': {
+    'Alerts': {
+      starter: '2 products',
+      platinum: '20 products',
+      diamond: '200 products'
+    },
+    'Follow-Up': {
+      starter: '5,000 emails',
+      platinum: '15,000 emails',
+      diamond: '15,000 emails'
+    },
+    'Inventory Management': {
+      starter: 'Limited',
+      platinum: 'Up to 40 SKUs',
+      diamond: '✓'
+    }
+  }
+};
+
+---
+
+<Layout title="Helium 10 - E-commerce Tools & Training">
+  <Header />
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-blue-900 to-blue-800 text-white pt-20 pb-24">
+    <div class="container mx-auto px-6">
+      <div class="max-w-3xl">
+        <h1 class="text-5xl font-bold mb-6">
+          Power Your E-commerce Success with Helium 10
+        </h1>
+        <p class="text-xl text-blue-100 mb-8">
+          The all-in-one suite of tools and training for Amazon and Walmart sellers. Start, grow, and scale your business with data-driven precision.
+        </p>
+        <div class="flex space-x-8">
+          <a href={AFFILIATE_URL} class="bg-blue-500 hover:bg-blue-600 px-8 py-3 rounded-full font-semibold transition-colors flex items-center">
+            Start Free Trial <ArrowRight class="ml-2 w-5 h-5" />
+          </a>
+          <a href={AFFILIATE_URL} class="border border-white hover:bg-white hover:text-blue-900 px-8 py-3 rounded-full font-semibold transition-colors">
+            Watch Demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Pricing Section -->
+  <section class="py-20 bg-gray-50" id="pricing">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Plans & Pricing</h2>
+        <p class="text-xl text-gray-600 mb-8">Powerful plans for every stage of your seller journey</p>
+        <div class="inline-flex items-center bg-blue-50 rounded-full px-6 py-3 text-blue-600">
+          🚀 Join the other <span class="font-bold mx-1">9,824</span> people who signed up last week
+        </div>
+        
+        <!-- Billing Toggle -->
+        <div class="mt-8 flex justify-center items-center space-x-3">
+          <span class="text-gray-600">Monthly</span>
+          <button class="relative inline-flex h-6 w-11 items-center rounded-full bg-blue-600 px-0.5 transition-colors focus:outline-none">
+            <span class="translate-x-6 inline-block h-4 w-4 transform rounded-full bg-white transition-transform"></span>
+          </button>
+          <span class="text-gray-900">Annual <span class="text-green-500 font-medium">(Save 25%)</span></span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <!-- Starter Plan -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="p-8">
+            <h3 class="text-2xl font-bold text-gray-900">Starter</h3>
+            <p class="mt-2 text-gray-500">The training and tools you need to get started</p>
+            <div class="mt-6">
+              <span class="text-4xl font-bold text-gray-900">$29</span>
+              <span class="text-gray-500">/mo</span>
+              <p class="text-sm text-gray-500 mt-1">Billed Annually</p>
+            </div>
+            <a href={AFFILIATE_URL} class="mt-8 block w-full bg-gray-100 text-gray-800 text-center py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+              Buy Now
+            </a>
+          </div>
+          <div class="border-t border-gray-100 p-8">
+            <ul class="space-y-4">
+              {Object.entries(pricingFeaturesObject).map(([category, items]) => (
+                <li>
+                  <h4 class="font-semibold text-gray-900 mb-2">{category}</h4>
+                  {Object.entries(items).map(([feature, plans]) => (
+                    <div class="mb-3">
+                      <div class="flex justify-between text-sm mb-1">
+                        <span>{feature}</span>
+                        <span class={plans.starter === 'Limited' ? 'text-orange-500' : 'text-gray-600'}>
+                          {plans.starter}
+                        </span>
+                      </div>
+                      <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-blue-500" style={`width: ${plans.starter === 'Limited' ? '33%' : plans.starter === '✓' ? '100%' : '0%'}`}></div>
+                      </div>
+                    </div>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Platinum Plan -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform scale-105 relative">
+          <div class="absolute top-0 right-0 mt-4 mr-4">
+            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Most Popular</span>
+          </div>
+          <div class="p-8">
+            <h3 class="text-2xl font-bold text-gray-900">Platinum</h3>
+            <p class="mt-2 text-gray-500">The must-have solution for your growing business</p>
+            <div class="mt-6">
+              <span class="text-4xl font-bold text-gray-900">$79</span>
+              <span class="text-gray-500">/mo</span>
+              <p class="text-sm text-gray-500 mt-1">Billed Annually</p>
+            </div>
+            <a href={AFFILIATE_URL} class="mt-8 block w-full bg-blue-600 text-white text-center py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+              Buy Now
+            </a>
+          </div>
+          <div class="border-t border-gray-100 p-8">
+            <ul class="space-y-4">
+              {Object.entries(pricingFeaturesObject).map(([category, items]) => (
+                <li>
+                  <h4 class="font-semibold text-gray-900 mb-2">{category}</h4>
+                  {Object.entries(items).map(([feature, plans]) => (
+                    <div class="mb-3">
+                      <div class="flex justify-between text-sm mb-1">
+                        <span>{feature}</span>
+                        <span class={plans.platinum === 'Limited' ? 'text-orange-500' : 'text-gray-600'}>
+                          {plans.platinum}
+                        </span>
+                      </div>
+                      <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-blue-500" style={`width: ${plans.platinum === 'Limited' ? '66%' : plans.platinum === '✓' ? '100%' : '0%'}`}></div>
+                      </div>
+                    </div>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Diamond Plan -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="p-8">
+            <h3 class="text-2xl font-bold text-gray-900">Diamond</h3>
+            <p class="mt-2 text-gray-500">Perfect for expert sellers looking to scale</p>
+            <div class="mt-6">
+              <span class="text-4xl font-bold text-gray-900">$229</span>
+              <span class="text-gray-500">/mo</span>
+              <p class="text-sm text-gray-500 mt-1">Billed Annually</p>
+            </div>
+            <a href={AFFILIATE_URL} class="mt-8 block w-full bg-gray-800 text-white text-center py-3 px-6 rounded-lg font-medium hover:bg-gray-900 transition-colors">
+              Buy Now
+            </a>
+          </div>
+          <div class="border-t border-gray-100 p-8">
+            <ul class="space-y-4">
+              {Object.entries(pricingFeaturesObject).map(([category, items]) => (
+                <li>
+                  <h4 class="font-semibold text-gray-900 mb-2">{category}</h4>
+                  {Object.entries(items).map(([feature, plans]) => (
+                    <div class="mb-3">
+                      <div class="flex justify-between text-sm mb-1">
+                        <span>{feature}</span>
+                        <span class={plans.diamond === 'Limited' ? 'text-orange-500' : 'text-gray-600'}>
+                          {plans.diamond}
+                        </span>
+                      </div>
+                      <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-blue-500" style={`width: ${plans.diamond === 'Limited' ? '100%' : plans.diamond === '✓' ? '100%' : '0%'}`}></div>
+                      </div>
+                    </div>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add-ons Section -->
+      <div class="mt-20">
+        <h3 class="text-2xl font-bold text-center text-gray-900 mb-12">Powerful Add-ons</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div class="bg-white rounded-xl shadow-md p-6">
+            <h4 class="text-xl font-semibold mb-2">Exclusive Training</h4>
+            <p class="text-gray-600 mb-4">Networking and training reserved exclusively for top-tier sellers</p>
+            <p class="text-lg font-bold text-gray-900">Starting at $99/mo</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-md p-6">
+            <h4 class="text-xl font-semibold mb-2">Market Intelligence</h4>
+            <p class="text-gray-600 mb-4">Access the most accurate insights to grow your business</p>
+            <p class="text-lg font-bold text-gray-900">Starting at $500/mo</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-md p-6">
+            <h4 class="text-xl font-semibold mb-2">Elite Package</h4>
+            <p class="text-gray-600 mb-4">Advanced features and priority support for power users</p>
+            <p class="text-lg font-bold text-gray-900">Starting at $99/mo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Who It's For Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-16 text-gray-900">Who It's For</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {userTypes.map((user) => (
+          <div class="text-center p-6 rounded-xl border border-gray-200 hover:border-blue-500 transition-colors">
+            <div class="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <user.icon class="w-6 h-6 text-blue-600" />
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-gray-900">{user.title}</h3>
+            <p class="text-gray-600">{user.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+          <h2 class="text-4xl font-bold text-center text-gray-900 mb-4">See Helium 10 in Action</h2>
+          <p class="text-xl text-center text-gray-600 mb-12">Watch how successful sellers are using Helium 10 to build their e-commerce empires</p>
+          <div class="max-w-screen-xl mx-auto px-4 lg:px-8"> 
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                  <div style="padding-top: 56.25%;">
+                      <iframe
+                          src="https://www.youtube.com/embed/ELJSdDAU_oE"
+                          title="Helium 10 Success Story"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen
+                          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                      ></iframe>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Scale Your E-commerce Business?</h2>
+      <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+        Join thousands of successful sellers who have transformed their business with Helium 10
+      </p>
+      <a href={AFFILIATE_URL} class="bg-blue-500 hover:bg-blue-600 px-8 py-3 rounded-full font-semibold transition-colors inline-flex items-center">
+        Start Your Free Trial Today <ArrowRight class="ml-2 w-5 h-5" />
+      </a>
+    </div>
+  </section>
+</Layout>

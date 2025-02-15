@@ -1,0 +1,65 @@
+---
+interface Benefit {
+  icon: any;
+  title: string;
+  description: string;
+  metrics?: {
+    value: string;
+    label: string;
+  }[];
+}
+
+interface Props {
+  items: Benefit[];
+}
+
+const { items }: Props = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {items.map((item: Benefit, index: number) => (
+    <div 
+      class="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden"
+      style={`animation-delay: ${index * 150}ms`}
+    >
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      <div class="relative z-10">
+        <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <item.icon class="w-6 h-6 text-blue-600" />
+        </div>
+        <h3 class="text-xl font-semibold mb-4 text-gray-900">{item.title}</h3>
+        <p class="text-gray-600 mb-6">{item.description}</p>
+        {item.metrics && (
+          <div class="border-t pt-4 mt-4">
+            <div class="grid grid-cols-2 gap-4">
+              {item.metrics.map((metric: { value: string; label: string }) => (
+                <div>
+                  <p class="text-2xl font-bold text-blue-600">{metric.value}</p>
+                  <p class="text-sm text-gray-500">{metric.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .grid > div {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
