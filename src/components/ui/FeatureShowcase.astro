@@ -8,7 +8,7 @@ interface Props {
   title: string;
   description: string;
   features: Feature[];
-  image: string;
+  image?: string;
   reversed?: boolean;
 }
 
@@ -25,15 +25,17 @@ const { title, description, features, image, reversed = false }: Props = Astro.p
         <p class="text-xl text-gray-600 mb-8">{description}</p>
         <ul class="space-y-4">
           {features.map((feature: Feature) => (
-            <li class="flex items-start gap-4">
-              <div class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
-                <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
+            <li class="flex items-start">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
               </div>
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">{feature.title}</h4>
-                <p class="text-gray-600">{feature.description}</p>
+              <div class="ml-4">
+                <h4 class="text-lg font-medium text-gray-900">{feature.title}</h4>
+                <p class="mt-2 text-base text-gray-500">{feature.description}</p>
               </div>
             </li>
           ))}
@@ -41,11 +43,14 @@ const { title, description, features, image, reversed = false }: Props = Astro.p
       </div>
       <div class:list={["relative", reversed ? "lg:order-first" : ""]}>
         <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl transform rotate-3"></div>
-        <img
-          src={image}
-          alt={title}
-          class="relative rounded-2xl shadow-lg transform hover:scale-[1.02] transition-transform duration-300"
-        />
+        {image && (
+          <img
+            src={image}
+            alt={title}
+            class="relative rounded-2xl shadow-lg transform hover:scale-[1.02] transition-transform duration-300"
+            loading="lazy"
+          />
+        )}
       </div>
     </div>
   </div>
